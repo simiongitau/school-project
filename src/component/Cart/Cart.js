@@ -1,29 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import top from "../../assert/images (1).jpg";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemsCart } from "../../Redux/cartSlice";
+import send from "../../assert/send.jpg";
 export default function Cart() {
   const Wrapper = styled.div`
     position: relative;
-  `;
-  const Cart = styled.div`
-    flex: 8;
-    height: 78vh;
-    background-color: rgba(179, 174, 168, 0.295);
-    border-radius: 15px;
-    display: flex;
-    height: 20vh;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 10px;
-  `;
-  const Summarly = styled.div`
-    flex: 4;
-    height: 70vh;
-    z-index: 1;
-    position: absolute;
-    right: 0;
   `;
   const Main = styled.div`
     display: flex;
@@ -73,11 +57,13 @@ export default function Cart() {
       margin-top: 10px;
       margin-right: 5px;
       input {
-        padding: 3px;
+        padding: 6px;
+        width: 59%;
         border-radius: 2px;
         border: 1px solid gray;
         outline: none;
         background-color: rgba(183, 234, 243, 0.63);
+        border-radius: 5px;
       }
     }
   `;
@@ -114,17 +100,20 @@ export default function Cart() {
   return (
     <Wrapper>
       {/* neader section   */}
-      <Main>
+      <Main className="">
         {/* cart section */}
         {/* mapping cart items */}
         {carts.cartItems.length === 0 ? (
-          <div>
-            <h4>your cart is empty</h4>
+          <div className="w-[75%]">
+            <h4 className="text-4xl m-[40px]">your cart is empty!</h4>
           </div>
         ) : (
           carts.cartItems.map((cartItem) => {
             return (
-              <Cart className="mt-[20px]" key={cartItem.id}>
+              <div
+                className="mt-[20px] w-[76%] flex gap-12 h-[20%] bg-slate-200 justify-between items-center"
+                key={cartItem.id}
+              >
                 {/* div of image and it details */}
                 <Product>
                   {/* image */}
@@ -157,13 +146,13 @@ export default function Cart() {
                 >
                   remove
                 </button>
-              </Cart>
+              </div>
             );
           })
         )}
 
         {/* summarly section */}
-        <Summarly className="mt-[20px] bg-slate-200 shadow-xl rounded-2">
+        <div className="mt-[20px] bg-slate-300 shadow-xl rounded-2 ml-4 p-3 z-10  ">
           <div className="mt-[30px] text-center uppercase">order summarly</div>
           <div className="p-1 bg-primary w-[150px] ml-[30%]"></div>
           <div className=" mt-[10px] flex justify-between mb-9">
@@ -173,27 +162,57 @@ export default function Cart() {
           <Detail>shipping detail</Detail>
           <Container>
             <div>
-              <label>name:</label>
-              <input placeholder="mary wanboi" type="name" required />
+              <label className="uppercase">name:</label>
+              <input
+                placeholder="mary wanboi"
+                type="name"
+                required
+                className="shadow-sm"
+              />
             </div>
             <div>
-              <span>telphone no :</span>
+              <span className="uppercase">telphone no :</span>
               <input placeholder="07*********" />
             </div>
-            <div>
-              <span>county:</span>
-              <input placeholder="07*********" />
-            </div>
-            <div>
-              <span>location</span>
-              <input placeholder="07*********" />
+            {/* county selection */}
+            <div className="flex justify-center items-center">
+              <DropdownButton
+                // id="dropdown-basic-button"
+                title="select pick county"
+                className=" text-black h-10 bg-gray-400 w-fit rounded  "
+              >
+                <Dropdown.Item href="#/action-1">eldoret</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">kisumu</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">nyeri</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">nyandarua</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">nakuru</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">bomet</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">kisii</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">baringo</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">embu</Dropdown.Item>
+              </DropdownButton>
+              {/* location selection */}
+              <DropdownButton
+                // id="dropdown-basic-button"
+                title="select pick location"
+                className="h-10 bg-gray-400 w-fit rounded"
+              >
+                <Dropdown.Item href="#/action-1">kericho</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">burnforest</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">kitale town</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">olkarau</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">vihiga</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">nyanza town</Dropdown.Item>
+              </DropdownButton>
             </div>
             {/* county drop down */}
 
             {/* location */}
           </Container>
           <Tax className="mb-[40px] mt-[50px]">
-            <h5 className="text-black">tax 16% and transport fee</h5>
+            <h5 className="text-black shadow-sm">
+              tax 16% and transport fee within eldoret
+            </h5>
             <span>
               <h4>200</h4>
               <h4>ksh</h4>
@@ -205,11 +224,11 @@ export default function Cart() {
             <h4>60 000 ksh</h4>
           </Total>
           <>
-            <button className="bg-gray-700 p-2 w-[150px] ml-[150px] mt-2 rounded text-white">
+            <button className="bg-gray-700 p-2 w-[150px] ml-[150px] mt-2 rounded text-white ">
               checkout
             </button>
           </>
-        </Summarly>
+        </div>
       </Main>
       {/* <Footer/> */}
     </Wrapper>
