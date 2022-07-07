@@ -6,176 +6,97 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../Redux/Apicall";
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassord] = useState("");
+  // register dtail catching
+  const [email1, setEmail1] = useState("");
+  const [password1, setPassord1] = useState("");
+  const [confirm, setConfirm] = useState("");
+  console.log(confirm);
   const dispatch = useDispatch();
 
-  const user = {
-    email,
-    password,
+  // fuction to submit value login
+  const SubmitData = (e) => {
+    e.preventDefault();
+    updateUser({ email, password }, dispatch);
   };
-
-  // method to handle submit
-  // const handleSubmit = () => {
-  //   updateUser(user, dispatch);
-  // };
-
-  const Main = styled.div`
-    display: flex;
-  `;
-  const Light = styled.div`
-    flex: 6;
-    height: 62vh;
-    span {
-      text-transform: uppercase;
-    }
-    div {
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      span {
-        margin-bottom: 20px;
-        input {
-          color: gray;
-          width: 250px;
-        }
-      }
-    }
-    button {
-      width: 100px;
-      padding: 10px;
-      border-radius: 15px;
-      margin-bottom: 15px;
-    }
-  `;
-  const Email = styled.span`
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-right: 45px;
-  `;
-  const Password = styled.span`
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-right: 12px;
-  `;
-  const Right = styled.div`
-    flex: 6;
-    height: 62vh;
-    span {
-      text-transform: uppercase;
-    }
-    div {
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      span {
-        margin-bottom: 5px;
-        input {
-          color: gray;
-          width: 250px;
-        }
-      }
-    }
-    button {
-      width: 100px;
-      padding: 10px;
-      border-radius: 15px;
-    }
-  `;
-  const Center = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    border-radius: 20px;
-    padding-bottom: 100px;
-    margin-left: 4px;
-    margin-right: 4px;
-  `;
-  const Ema = styled.span`
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-right: 115px;
-  `;
-  const Pass = styled.span`
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-right: 79px;
-  `;
-  const Corn = styled.span`
-    font-size: 15px;
-    text-transform: uppercase;
-    margin-right: 12px;
-  `;
+  // function to subbmit register
+  const SubmitRegister = (e) => {
+    e.preventDeafult();
+  };
   return (
-    <form>
-      <Main>
-        <Light>
-          {/* heading */}
-          <Center className="shadow-xl">
-            <span>login in</span>
-            <div>
-              <span>
-                <Email>email:</Email>
-                <input
-                  type="text"
-                  // placeholder="enter email address"
-                  className="p-3 border-b-4 border-gray-400 bg-gray-100"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </span>
-              <span>
-                <Password>password:</Password>
-                <input
-                  type="password"
-                  placeholder="enter password"
-                  className="p-3 border-b-4 border-gray-400 bg-gray-100"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </span>
-            </div>
-            <button
-              className="bg-gray-500"
-              // onClick={handleSubmit()}
-            >
-              send
-            </button>
-          </Center>
-        </Light>
-
-        {/* registered section     */}
-        <Right>
-          <Center className="shadow-xl">
-            <span>register</span>
-            <div>
-              <span>
-                <Ema>email:</Ema>
-                <input
-                  placeholder="enter email address"
-                  className="p-3 border-b-4 border-gray-400 bg-gray-100"
-                />
-              </span>
-              <span>
-                <Pass>password:</Pass>
-                <input
-                  placeholder="enter password"
-                  className="p-3 border-b-4 border-gray-400 bg-gray-100"
-                />
-              </span>
-              <span>
-                <Corn>confirm password:</Corn>
-                <input
-                  placeholder="confirm password"
-                  className="p-3 border-b-4 border-gray-400 bg-gray-100"
-                />
-              </span>
-            </div>
-            <button className="bg-gray-400">send</button>
-          </Center>
-        </Right>
-      </Main>
-      <Footer />
-    </form>
+    <div className="grid grid-cols-2 pt-[100px]">
+      {/* login div */}
+      <div className="p-10 flex justify-center">
+        <form
+          className="bg-blue-200 w-[70%]  rounded shadow-xl p-3"
+          onSubmit={SubmitData}
+        >
+          <span className="font-bold uppercase mx-[50%] ">login</span>
+          <div className="flex justify-around items-center mt-4">
+            <span className="uppercase font-light">name:</span>
+            <input
+              type="text"
+              required
+              className="p-3 ml-7 border-b-2 outline-none border-gray-600"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-around items-center">
+            <span className="uppercase font-light">password:</span>
+            <input
+              type="password"
+              required
+              className="p-3 mt-4  border-b-2 outline-none border-gray-600"
+              onChange={(e) => setPassord(e.target.value)}
+            />
+          </div>
+          <button
+            className="bg-gray-600 p-3 w-[150px] rounded mt-20 mx-[40%] text-white"
+            type="submit"
+          >
+            send
+          </button>
+        </form>
+      </div>
+      {/* register div */}
+      <div className=" p-10 justify-center">
+        <form
+          className="w-[80%] shadow-xl bg-blue-200 rounded p-4"
+          onSubmit={SubmitRegister}
+        >
+          <span className="font-bold uppercase mx-[40%] ">register</span>
+          <div className="flex justify-around mt-3 items-center">
+            <span className="uppercase font-light ">email:</span>
+            <input
+              type="text"
+              required
+              className="p-3 ml-[106px] outline-none border-b-2 border-gray-500"
+              onChange={(e) => setEmail1(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-around mt-3 items-center ">
+            <span className="uppercase font-light">password:</span>
+            <input
+              type="text"
+              required
+              className="p-3 ml-20 border-b-2 border-gray-500 outline-none"
+              onChange={(e) => setPassord1(e.target.value)}
+            />
+          </div>
+          <div className="flex justify-around mt-3 items-center">
+            <span className="uppercase font-light">confirm password:</span>
+            <input
+              type="text"
+              required
+              className="p-3 ml-4 border-b-2 border-gray-500 outline-none"
+              onChange={(e) => setConfirm(e.target.value)}
+            />
+          </div>
+          <button className="p-3 bg-gray-500 w-[150px] rounded mx-[40%] my-4 text-white">
+            send
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }

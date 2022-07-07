@@ -5,7 +5,10 @@ const userSlice = createSlice({
   //this is our state
   name: "user",
   initialState: {
-    userInfo: [],
+    userInfo: {
+      name: "",
+      password: "",
+    },
     pending: false,
     error: false,
   },
