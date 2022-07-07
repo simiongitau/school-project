@@ -1,15 +1,14 @@
-// import { updateStart, updateError, updateSuccess } from "./UserSlice";
-// import { useDispatch } from "react-redux";
-// import axios from "axios";
-// // export because we are going to use in component
-// const dispatch = useDispatch();
-// export const updateUser = async (user, dispatch) => {
-//   // dispatch method is used to change the value of state
-//   dispatch(updateStart());
-//   try {
-//     const res = await axios.get("http://localhost:5000/");
-//     dispatch(updateSuccess(res.data));
-//   } catch (error) {
-//     dispatch(updateError());
-//   }
-// };
+import axios from "axios";
+import { updateStart, updateError, updateSuccess } from "./UserSlice";
+//  creating a function
+export const updateUser = async (user, dispatch) => {
+  dispatch(updateStart());
+  // making api call
+  try {
+    const res = await axios.post(`http://localhost:5000/user`, user);
+    dispatch(updateSuccess(res.data));
+    console.log(res.data);
+  } catch (error) {
+    dispatch(updateError);
+  }
+};

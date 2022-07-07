@@ -71,17 +71,20 @@ export default function Nav() {
       top: 0;
     }
   `;
-  // my testing
+  // my testing\\\\\\\\\\\\
   const dispatch = useDispatch();
   const updateUser = async () => {
     // dispatch method is used to change the value of state
     dispatch(updateStart());
-    try {
-      const res = await axios.get("http://localhost:5000/");
-      dispatch(updateSuccess(res.data));
-    } catch (error) {
-      dispatch(updateError(error));
-    }
+    await axios
+      .get(`http://localhost:5000/user`)
+      .then((response) => {
+        dispatch(updateSuccess(response.data));
+        console.log(response);
+      })
+      .catch((error) => {
+        dispatch(updateError(error));
+      });
   };
   // my testing
   return (

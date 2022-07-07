@@ -1,4 +1,4 @@
-import spinach from "./assert/images (1).jpg";
+import spinach from "./assert/dap.jpg";
 
 const Data = [
   {

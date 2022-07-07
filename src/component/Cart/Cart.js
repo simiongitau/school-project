@@ -4,10 +4,13 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { removeItemsCart } from "../../Redux/cartSlice";
-import send from "../../assert/send.jpg";
+import { Link } from "react-router-dom";
+import Footer from "../footer/Footer";
+import send from "../../assert/dap.jpg";
 export default function Cart() {
   const Wrapper = styled.div`
     position: relative;
+    background-color: rgba(245, 245, 245, 0.938);
   `;
   const Main = styled.div`
     display: flex;
@@ -57,13 +60,9 @@ export default function Cart() {
       margin-top: 10px;
       margin-right: 5px;
       input {
-        padding: 6px;
         width: 59%;
-        border-radius: 2px;
-        border: 1px solid gray;
         outline: none;
-        background-color: rgba(183, 234, 243, 0.63);
-        border-radius: 5px;
+        background-color: smoke;
       }
     }
   `;
@@ -111,7 +110,7 @@ export default function Cart() {
           carts.cartItems.map((cartItem) => {
             return (
               <div
-                className="mt-[20px] w-[76%] flex gap-12 h-[20%] bg-slate-200 justify-between items-center"
+                className="mt-[20px] w-[76%] flex gap-12 h-[20%] rounded justify-between items-center border-b-4 border-gray-400"
                 key={cartItem.id}
               >
                 {/* div of image and it details */}
@@ -138,7 +137,7 @@ export default function Cart() {
                   </div>
                 </Quantiy>
                 {/* amount */}
-                <span>45000</span>
+                <span className="font-bolder uppercase">45000 kesh</span>
                 {/* delete */}
                 <button
                   className="mr-[8px] bg-red-300 p-3 rounded shadow-xl shadow-blue-200"
@@ -152,9 +151,9 @@ export default function Cart() {
         )}
 
         {/* summarly section */}
-        <div className="mt-[20px] bg-slate-300 shadow-xl rounded-2 ml-4 p-3 z-10  ">
+        <div className="mt-[20px]  shadow-xl rounded-2 mr-3 ml-3 p-3 z-10  ">
           <div className="mt-[30px] text-center uppercase">order summarly</div>
-          <div className="p-1 bg-primary w-[150px] ml-[30%]"></div>
+          <div className="p-1 bg-gray-300 w-[155px] ml-[31%]"></div>
           <div className=" mt-[10px] flex justify-between mb-9">
             <span className="text-xl font-light uppercase">total item</span>
             <span className="mr-[10px]">5</span>
@@ -167,12 +166,15 @@ export default function Cart() {
                 placeholder="mary wanboi"
                 type="name"
                 required
-                className="shadow-sm"
+                className=" border-b-4 border-gray-400 bg-gray-100 p-3"
               />
             </div>
             <div>
               <span className="uppercase">telphone no :</span>
-              <input placeholder="07*********" />
+              <input
+                placeholder="07*********"
+                className="border-b-4 border-gray-400 bg-gray-100 p-3"
+              />
             </div>
             {/* county selection */}
             <div className="flex justify-center items-center">
@@ -223,14 +225,16 @@ export default function Cart() {
             <span>total cost</span>
             <h4>60 000 ksh</h4>
           </Total>
-          <>
+          <Link to="/login">
             <button className="bg-gray-700 p-2 w-[150px] ml-[150px] mt-2 rounded text-white ">
               checkout
             </button>
-          </>
+          </Link>
         </div>
       </Main>
-      {/* <Footer/> */}
+      <div className="b-0 sticky z-12">
+        <Footer />
+      </div>
     </Wrapper>
   );
 }

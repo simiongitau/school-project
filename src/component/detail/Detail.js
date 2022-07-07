@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
-import gff from "../../assert/images (1).jpg";
+import gff from "../../assert/dap.jpg";
 export default function Detail() {
   const Container = styled.div`
     display: flex;

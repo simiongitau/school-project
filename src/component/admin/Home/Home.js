@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Footer from "../../footer/Footer";
 import { Link } from "react-router-dom";
 import Analysis from "../saleAnalysis/Analysis";
+import "./home.css";
 export default function Home() {
   const Wrapper = styled.div`
     display: flex;
     background-color: rgba(70, 64, 64, 0.342);
-    height: 65vh;
   `;
   const Right = styled.div`
     flex: 10;
@@ -55,7 +55,9 @@ export default function Home() {
           <Analysis />
         </Right>
       </Wrapper>
-      <Footer />
+      <div className="bottom-footer">
+        <Footer />
+      </div>
     </>
   );
 }

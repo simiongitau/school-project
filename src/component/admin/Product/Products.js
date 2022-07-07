@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import imj from "../../../assert/images (1).jpg";
+import imj from "../../../assert/dap.jpg";
 import { Link } from "react-router-dom";
 export default function Products() {
   const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgba(245, 234, 221, 0.906);
     height: 19vh;
     width: 90%;
     padding: 0px 15px;
@@ -41,19 +40,19 @@ export default function Products() {
   `;
 
   return (
-    <Wrapper className="shadow-xl">
+    <Wrapper className="border-y-2 border-gray-600 bg-slate-100">
       <div>
         <img src={imj} alt="photos" />
         <span>
           <i>spinach</i>
         </span>
       </div>
-      <span>
-        500<span style={{ fontWeight: "bold" }}>ksh</span>
+      <span className="text-3xl font-bold uppercase">
+        500<span>kesh</span>
       </span>
       <p>
         Coast farmcare agrovet is an organization online web application for
-        selling their product{" "}
+        selling their product
       </p>
       <Link to="/update">
         <button>update</button>
