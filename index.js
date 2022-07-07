@@ -4,10 +4,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Data = require("./Data");
 // import our model
-const User = require("./model/User");
-const Task = require("./model/Task");
+const userRoute = require("./routes/user");
+const taskRoute = require("./routes/task");
+// to user
 app.use(cors());
 app.use(express.json());
+app.use(userRoute);
+app.use(taskRoute);
+
 mongoose
   .connect("mongodb://localhost:27017/agrovet")
   .then(() => console.log("database connected"))
@@ -19,12 +23,7 @@ app.get("/", (req, res) => {
   // res.status(200).json({'name':'simion gitau'})
   res.send(Data);
 });
-// post
-app.post("/task", (req, res) => {
-  console.log(res.body);
-  // creating new object
-  const task = new Task(req.body);
-});
+
 // get
 // task /: id: get
 //   / task /:id patch
