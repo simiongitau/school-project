@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { removeItemsCart } from "../../Redux/cartSlice";
+import { useEffect } from "react";
+import {
+  removeItemsCart,
+  decreaseCart,
+  addToCart,
+  clearCart,
+  getTotals,
+} from "../../Redux/cartSlice";
 import { Link } from "react-router-dom";
-import Footer from "../footer/Footer";
-import send from "../../assert/dap.jpg";
 export default function Cart() {
-  const Wrapper = styled.div`
-    position: relative;
-    background-color: rgba(245, 245, 245, 0.938);
-  `;
+  const Wrapper = styled.div``;
   const Main = styled.div`
-    display: flex;
+    /* display: flex; */
   `;
   const Product = styled.div`
     display: flex;
@@ -92,25 +92,46 @@ export default function Cart() {
   `;
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.cart);
+  console.log(carts.cartItems);
+  // updating the subtottal
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [carts, dispatch]);
   // method to remove item from the cart
   const handleRemove = (cartItem) => {
     dispatch(removeItemsCart(cartItem));
   };
+  // decrease function
+  const handleDecreaseCart = (cartItem) => {
+    dispatch(decreaseCart(cartItem));
+  };
+  // increase function
+  const handleIncreaseCart = (cartItem) => {
+    dispatch(addToCart(cartItem));
+  };
+  // clear cart function
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
   return (
     <Wrapper>
+      <i
+        className="bi bi-x-circle text-4xl text-red-700"
+        onClick={() => handleClearCart()}
+      ></i>
       {/* neader section   */}
-      <Main className="">
+      <Main className="row relative w-full">
         {/* cart section */}
         {/* mapping cart items */}
         {carts.cartItems.length === 0 ? (
-          <div className="w-[75%]">
+          <div className="w-[60%]">
             <h4 className="text-4xl m-[40px]">your cart is empty!</h4>
           </div>
         ) : (
           carts.cartItems.map((cartItem) => {
             return (
               <div
-                className="mt-[20px] w-[76%] flex gap-12 h-[20%] rounded justify-between items-center border-b-4 border-gray-400"
+                className="col-lg-6 flex mt-[20px] w-[60%] gap-12 h-[20%] rounded justify-between items-center border-b-4 border-gray-400"
                 key={cartItem.id}
               >
                 {/* div of image and it details */}
@@ -130,14 +151,22 @@ export default function Cart() {
                 <Quantiy>
                   <h5>{cartItem.cartQuantity}</h5>
                   <div>
-                    <button className="bg-blue-200 rounded p-3 mb-3 shadow-xl">
+                    <button
+                      className="bg-blue-200 rounded p-3 mb-3 shadow-xl"
+                      onClick={() => handleIncreaseCart(cartItem)}
+                    >
                       +
                     </button>
-                    <button className="bg-blue-200 rounded p-3 ">-</button>
+                    <button
+                      className="bg-blue-200 rounded p-3 "
+                      onClick={() => handleDecreaseCart(cartItem)}
+                    >
+                      -
+                    </button>
                   </div>
                 </Quantiy>
                 {/* amount */}
-                <span className="font-bolder uppercase">45000 kesh</span>
+                <span className="font-bolder uppercase">{cartItem.total}</span>
                 {/* delete */}
                 <button
                   className="mr-[8px] bg-red-300 p-3 rounded shadow-xl shadow-blue-200"
@@ -151,7 +180,7 @@ export default function Cart() {
         )}
 
         {/* summarly section */}
-        <div className="mt-[20px]  shadow-xl rounded-2 mr-3 ml-3 p-3 z-10  ">
+        <div className="mt-[10px]  shadow-xl rounded-2 mr-3 ml-3 p-3 z-10 absolute top-0 bg-green-100 w-[25%] right-0">
           <div className="mt-[30px] text-center uppercase">order summarly</div>
           <div className="p-1 bg-gray-300 w-[155px] ml-[31%]"></div>
           <div className=" mt-[10px] flex justify-between mb-9">
@@ -178,34 +207,87 @@ export default function Cart() {
             </div>
             {/* county selection */}
             <div className="flex justify-center items-center">
-              <DropdownButton
-                // id="dropdown-basic-button"
-                title="select pick county"
-                className=" text-black h-10 bg-gray-400 w-fit rounded  "
+              <select
+                name="cars"
+                id="cars"
+                className="p-4 w-[200px] border-b-2 border-gray-500 outline-none uppercase text-sm"
               >
-                <Dropdown.Item href="#/action-1">eldoret</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">kisumu</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">nyeri</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">nyandarua</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">nakuru</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">bomet</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">kisii</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">baringo</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">embu</Dropdown.Item>
-              </DropdownButton>
+                <option value="volvo">*select county*</option>
+                <option value="saab" className="uppercase text-sm">
+                  kisumu
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  kitale
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  Transnzoia
+                </option>
+                <option value="volvo" className="uppercase text-sm">
+                  Eldoret
+                </option>
+                <option value="saab" className="uppercase text-sm">
+                  kisumu
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  kitale
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  Transnzoia
+                </option>
+                <option value="volvo" className="uppercase text-sm">
+                  Eldoret
+                </option>
+                <option value="saab" className="uppercase text-sm">
+                  kisumu
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  kitale
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  Transnzoia
+                </option>
+              </select>
               {/* location selection */}
-              <DropdownButton
-                // id="dropdown-basic-button"
-                title="select pick location"
-                className="h-10 bg-gray-400 w-fit rounded"
+              <select
+                name="cars"
+                id="cars"
+                className="p-4 w-[200px] border-b-2 border-gray-500 outline-none uppercase text-sm"
               >
-                <Dropdown.Item href="#/action-1">kericho</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">burnforest</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">kitale town</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">olkarau</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">vihiga</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">nyanza town</Dropdown.Item>
-              </DropdownButton>
+                <option value="volvo">*select station*</option>
+                <option value="saab" className="uppercase text-sm">
+                  Munyaka
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  kitale tower
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  olkalau
+                </option>
+                <option value="volvo" className="uppercase text-sm">
+                  gilgil
+                </option>
+                <option value="saab" className="uppercase text-sm">
+                  kisumu mall
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  westaland
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  kitengela
+                </option>
+                <option value="volvo" className="uppercase text-sm">
+                  kapsoya
+                </option>
+                <option value="saab" className="uppercase text-sm">
+                  kericho
+                </option>
+                <option value="mercedes" className="uppercase text-sm">
+                  ziwa
+                </option>
+                <option value="audi" className="uppercase text-sm">
+                  matunda
+                </option>
+              </select>
             </div>
             {/* county drop down */}
 
@@ -223,7 +305,7 @@ export default function Cart() {
 
           <Total>
             <span>total cost</span>
-            <h4>60 000 ksh</h4>
+            <h4>{carts.cartTotalAmount} ksh</h4>
           </Total>
           <Link to="/login">
             <button className="bg-gray-700 p-2 w-[150px] ml-[150px] mt-2 rounded text-white ">
@@ -232,9 +314,6 @@ export default function Cart() {
           </Link>
         </div>
       </Main>
-      <div className="b-0 sticky z-12">
-        <Footer />
-      </div>
     </Wrapper>
   );
 }

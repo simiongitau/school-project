@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../Redux/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addDetail, addToCart } from "../../Redux/cartSlice";
 export default function Products({ product }) {
   const Wrapper = styled.div`
     background-color: rgba(165, 173, 180, 0.842);
@@ -53,7 +53,7 @@ export default function Products({ product }) {
       text-transform: uppercase;
     }
   `;
-  console.log(product);
+  // console.log(product);
   const dispatch = useDispatch();
   const { name, imagi, price } = product;
   // method to add items to cart
@@ -61,6 +61,7 @@ export default function Products({ product }) {
     // dispatch is used to update the state
     dispatch(addToCart(product));
   };
+  // handle detail
   return (
     <div className="col-lg-3 col-sm-6">
       <Wrapper>
@@ -73,7 +74,7 @@ export default function Products({ product }) {
         <Nav>
           <Link to="/detail">
             {" "}
-            <button onClick={() => console.log("you click me")}>maelezo</button>
+            <button>maelezo</button>
           </Link>
           <button onClick={() => hanbleAddTocart(product)}>add to cart</button>
         </Nav>

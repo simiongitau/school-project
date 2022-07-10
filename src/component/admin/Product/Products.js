@@ -40,14 +40,14 @@ export default function Products() {
   `;
 
   return (
-    <Wrapper className="border-y-2 border-gray-600 bg-slate-100">
+    <Wrapper className="border-y-2 shadow-sm bg-gray-50">
       <div>
-        <img src={imj} alt="photos" />
+        <img src={imj} alt="photos" width="2opx" height="20px" />
         <span>
           <i>spinach</i>
         </span>
       </div>
-      <span className="text-3xl font-bold uppercase">
+      <span className="text-3xl font-light uppercase">
         500<span>kesh</span>
       </span>
       <p>

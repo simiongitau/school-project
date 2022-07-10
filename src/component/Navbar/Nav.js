@@ -2,14 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateStart, updateError, updateSuccess } from "../../Redux/UserSlice";
+import { useEffect } from "react";
+import { getTotals } from "../../Redux/cartSlice";
+import { fetchUser } from "../../Redux/Apicall";
 import axios from "axios";
 // import { updateUser } from "../../Redux/Apicall";
 export default function Nav() {
   // accesing the state from the component
   // state user belong from the store
   const name = useSelector((state) => state.user.userInfo);
+  const cartsQuantity = useSelector((state) => state.cart.cartTotalQuantity);
   console.log(name);
+
   const Main = styled.div`
     height: 100px;
     width: 100%;
@@ -58,39 +62,25 @@ export default function Nav() {
         border-radius: 4px;
       }
     }
-    span {
-      padding: 5px;
-      background-color: red;
-      height: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      border-radius: 35px;
-      left: 25;
-      top: 0;
-    }
   `;
   // my testing\\\\\\\\\\\\
   const dispatch = useDispatch();
   const updateUser = async () => {
     // dispatch method is used to change the value of state
-    dispatch(updateStart());
-    await axios
-      .get(`http://localhost:5000/user`)
-      .then((response) => {
-        dispatch(updateSuccess(response.data));
-        console.log(response);
-      })
-      .catch((error) => {
-        dispatch(updateError(error));
-      });
+    fetchUser(dispatch);
   };
+
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [dispatch]);
   // my testing
   return (
-    <Main>
+    <Main className="relative">
       {/* image div */}
       <span>eldo agrovet</span>
+      <span className="bg-red-600 rounded-full absolute top-0 text-white p-1 left-[51%] font-bold">
+        {cartsQuantity}
+      </span>
       {/* list of home,cart about */}
       <Unorder>
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
@@ -102,10 +92,14 @@ export default function Nav() {
         <Link to="/about" style={{ textDecoration: "none", color: "black" }}>
           <li>about</li>
         </Link>
-        <span>16</span>
       </Unorder>
       {/* login and out */}
-      <div onClick={updateUser}>login/out</div>
+      <div onClick={updateUser}>
+        <Link to="/logina">
+          {" "}
+          <i className="bi bi-menu-button-wide text-4xl text-black"></i>
+        </Link>
+      </div>
     </Main>
   );
 }

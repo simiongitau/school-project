@@ -12,3 +12,17 @@ export const updateUser = async (login, dispatch) => {
     dispatch(updateError());
   }
 };
+
+// function to fetch the user
+export const fetchUser = async (dispatch) => {
+  dispatch(updateStart());
+  await axios
+    .get(`http://localhost:5000/user`)
+    .then((response) => {
+      dispatch(updateSuccess(response.data));
+      console.log(response);
+    })
+    .catch((error) => {
+      dispatch(updateError(error));
+    });
+};
