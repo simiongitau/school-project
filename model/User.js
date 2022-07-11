@@ -33,6 +33,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  history: {
+    type: Array,
+    default: [],
+  },
 });
 // model is used to store data in database
 const User = mongoose.model("user", userSchema);

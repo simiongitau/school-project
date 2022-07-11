@@ -7,6 +7,7 @@ const {
   createUser,
   updateUser,
   DeleteUser,
+  userPay,
 } = require("../controler/user");
 
 // fetching user data
@@ -21,5 +22,6 @@ router.patch("/user/update/:id", updateUser);
 
 // delete method
 router.delete("/user/delete/:id", DeleteUser);
+router.post("/user/successBuy", userPay);
 //  exp
 module.exports = router;
