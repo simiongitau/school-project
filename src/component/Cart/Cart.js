@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import Paypal from "../Paypal";
 import {
   removeItemsCart,
   decreaseCart,
@@ -112,6 +114,28 @@ export default function Cart() {
   // clear cart function
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+  // paypal
+  const transactionSuccess = async (data) => {
+    let variables = {
+      cartDetail: carts.cartItems,
+      paymentData: data,
+      total: carts.cartTotalAmount,
+    };
+    await axios
+      .post("http://localhost:5000/user/successBuy", variables)
+      .then((response) => {
+        if (response.data.onSuccess) {
+        } else {
+          alert("fail to buy");
+        }
+      });
+  };
+  const transactionError = () => {
+    console.log("transaction Error");
+  };
+  const transactionCancel = () => {
+    console.log("transaction Cancel");
   };
   return (
     <Wrapper>
@@ -307,11 +331,13 @@ export default function Cart() {
             <span>total cost</span>
             <h4>{carts.cartTotalAmount} ksh</h4>
           </Total>
-          <Link to="/login">
-            <button className="bg-gray-700 p-2 w-[150px] ml-[150px] mt-2 rounded text-white ">
-              checkout
-            </button>
-          </Link>
+          <Paypal
+            toPay={carts.cartTotalAmount}
+            onSuccess={transactionSuccess}
+            transactionError={transactionError}
+            transactionCancel={transactionCancel}
+            className="p-4"
+          />
         </div>
       </Main>
     </Wrapper>
