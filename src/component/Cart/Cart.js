@@ -94,6 +94,7 @@ export default function Cart() {
   `;
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.cart);
+  const cartsQuantity = useSelector((state) => state.cart.cartTotalQuantity);
   console.log(carts.cartItems);
   // updating the subtottal
   useEffect(() => {
@@ -138,18 +139,23 @@ export default function Cart() {
     console.log("transaction Cancel");
   };
   return (
-    <Wrapper>
+    <Wrapper className="h-screen bg-gray-200">
       <i
         className="bi bi-x-circle text-4xl text-red-700"
         onClick={() => handleClearCart()}
       ></i>
       {/* neader section   */}
-      <Main className="row relative w-full">
+      <Main className="row relative w-full ">
         {/* cart section */}
         {/* mapping cart items */}
         {carts.cartItems.length === 0 ? (
           <div className="w-[60%]">
-            <h4 className="text-4xl m-[40px]">your cart is empty!</h4>
+            <h4 className="text-4xl mx-[40px]">your cart is empty!</h4>
+            <Link to="/">
+              <span className="text-sm text-blue-400 mx-10 cursor-pointer underline">
+                back to shop
+              </span>
+            </Link>
           </div>
         ) : (
           carts.cartItems.map((cartItem) => {
@@ -204,12 +210,12 @@ export default function Cart() {
         )}
 
         {/* summarly section */}
-        <div className="mt-[10px]  shadow-xl rounded-2 mr-3 ml-3 p-3 z-10 absolute top-0 bg-green-100 w-[25%] right-0">
+        <div className="mt-[2px]  shadow-xl rounded-2 mr-3  p-3 z-10 absolute top-0 bg-gray-300 w-[25%] right-0">
           <div className="mt-[30px] text-center uppercase">order summarly</div>
           <div className="p-1 bg-gray-300 w-[155px] ml-[31%]"></div>
           <div className=" mt-[10px] flex justify-between mb-9">
             <span className="text-xl font-light uppercase">total item</span>
-            <span className="mr-[10px]">5</span>
+            <span className="mr-[10px]">{cartsQuantity}</span>
           </div>
           <Detail>shipping detail</Detail>
           <Container>

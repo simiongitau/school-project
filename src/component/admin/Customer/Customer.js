@@ -78,29 +78,80 @@ export default function Customer() {
         <span style={{ marginLeft: "150px", textTransform: "uppercase" }}>
           registered customers
         </span>
-        <Main className="shadow-lg">
-          <div>
-            <div>{/* image s  */}</div>
-            <span>
-              {/* <span style={{marginRight:'10px'}}>email:</span> */}
-              <span>simiongitau99@gmail.com</span>
-            </span>
-          </div>
-          <button>delete</button>
-        </Main>
+        <table className="table-auto w-[95%] mx-auto">
+          <thead>
+            <tr className="h-[80px] border-b-2 border-gray-300">
+              <th>email</th>
+              <th>password</th>
+              <th>delete</th>
+            </tr>
+          </thead>
+          <tbody className="">
+            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
+              <td>simio#3gmail.com</td>
+              <td>nairobi</td>
+              <td>
+                <button className="bg-red-200 p-2 rounded w-[100px]">
+                  delete
+                </button>
+              </td>
+            </tr>
+            <tr className="h-20 border-gray-300 border-b-2  bg-gray-100">
+              <td>evans mwangi</td>
+              <td>0994955</td>
+              <td>eldoret</td>
+            </tr>
+            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100 ">
+              <td>ty</td>
+              <td>093993993</td>
+              <td>kitale</td>
+            </tr>
+          </tbody>
+        </table>
       </Top>
       <Admin>
         <span style={{ marginLeft: "400px", textTransform: "uppercase" }}>
           system administrator members
         </span>
-        <Right className="shadow-lg">
-          <div>
-            <div></div>
-            <span>simion33@gmail.com</span>
-          </div>
-          <button>add</button>
-          <button>edit</button>
-        </Right>
+        <table className="table-auto w-[95%] mx-auto">
+          <thead>
+            <tr className="h-[80px] border-b-2 border-gray-300">
+              <th>email</th>
+              <th>password</th>
+              <th>update</th>
+              <th>delete</th>
+            </tr>
+          </thead>
+          <tbody className="">
+            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
+              <td>simio#3gmail.com</td>
+              <td>nairobi</td>
+              <td>
+                <button className="bg-green-200 p-2 rounded w-[100px]">
+                  edit
+                </button>
+              </td>
+              <td>
+                {" "}
+                <button className="bg-red-200 p-2 rounded w-[100px]">
+                  delete
+                </button>
+              </td>
+            </tr>
+            <tr className="h-20 border-gray-300 border-b-2  bg-gray-100">
+              <td>evans mwangi</td>
+              <td>0994955</td>
+              <td>eldoret</td>
+              <td>kapsoya</td>
+            </tr>
+            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100 ">
+              <td>093993993</td>
+              <td>kitale</td>
+              <td>town</td>
+              <td>hjgjfggk</td>
+            </tr>
+          </tbody>
+        </table>
       </Admin>
     </Wrapper>
   );
