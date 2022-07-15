@@ -6,7 +6,7 @@ const imgSchema = new mongoose.Schema({
   price: { type: Number },
   desc: { type: String },
   instore: { type: String },
-
+  category: { type: String },
   productImage: { type: String },
 });
 const Image = mongoose.model("Image", imgSchema);

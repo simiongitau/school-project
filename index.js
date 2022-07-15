@@ -5,16 +5,21 @@ const cors = require("cors");
 const Data = require("./Data");
 const path = require("path");
 const multer = require("multer");
-var fs = require("file-system");
 // import our model
+const Deliver = require("./model/Deliver");
+const Order = require("./model/Order");
 const userRoute = require("./routes/user");
-const taskRoute = require("./routes/task");
+const orderRoute = require("./routes/order");
+const deliverRoute = require("./routes/deliver");
+const productRoute = require("./routes/product");
 const Image = require("./model/ImageFold");
 // to user
 app.use(cors());
 app.use(express.json());
 app.use(userRoute);
-app.use(taskRoute);
+app.use(orderRoute);
+app.use(deliverRoute);
+app.use(productRoute);
 app.use("/images", express.static("images"));
 
 mongoose
@@ -68,6 +73,7 @@ app.post(
       name: req.body.name,
       price: req.body.price,
       desc: req.body.desc,
+      category: req.body.cat,
       instore: req.body.instore,
     });
     product.save();
@@ -76,4 +82,38 @@ app.post(
     res.status(400).send({ error: error.message });
   }
 );
+app.post("/successBuy", async (req, res) => {
+  console.log(req.body);
+  // posting delively info
+  try {
+    const order = new Order({
+      paid: req.body?.paymentData?.paid,
+      paymentID: req.body?.paymentData?.paymentID,
+      recipient_name: req.body?.paymentData?.recipient_name,
+      email: req.body?.paymentData?.email,
+      total: req.body?.total,
+    });
+    let info = {
+      product_name: "spinach",
+      product_quantity: "6",
+    };
+    console.log(info);
+    const deliver = new Deliver({
+      paymentID: req.body?.paymentData?.paymentID,
+      quantity: req.body?.cartsQuantity,
+      email: "simion33@gmail.com",
+      telphone_number: req.body?.transport?.telNumber,
+      county: req.body?.transport?.county,
+      location: req.body?.transport?.location,
+      $push: {
+        product_name: info,
+      },
+    });
+
+    await order.save(), deliver.save();
+    return res.status(200).json({ success: true, order, deliver });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+});
 app.listen(5000, () => console.log("server running"));

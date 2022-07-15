@@ -1,5 +1,4 @@
 const User = require("../model/User");
-const Payment = require("../model/Payment");
 exports.getAllUser = async (req, res) => {
   // find is used to retrive or fertch data from the mongo db
   const user = await User.find();
@@ -12,21 +11,44 @@ exports.getAllUser = async (req, res) => {
   return res.json({ success: true, user });
 };
 
-exports.getSpecifiicUser = async (req, res) => {
-  // find is used to retrive or fertch data from the mongo db
-  console.log(req.params.id);
-  const user = await User.findById(req.params.id);
-  if (!user) {
-    return res.status(404).json({
-      success: false,
-      message: "user does not exist",
+exports.login = async (req, res, next) => {
+  console.log(req.body);
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({
+      message: "Username or Password not present",
     });
   }
-  return res.json({ success: true, user });
+  try {
+    const user = await User.findOne({ email, password });
+    if (!user) {
+      res.status(401).json({
+        message: "Login not successful",
+        error: "User not found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Login successful",
+        user,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "An error occurred",
+      error: error.message,
+    });
+  }
 };
 
 exports.createUser = async (req, res) => {
-  console.log(res.body);
+  console.log(req.body);
+  const { password, confirm } = req.body;
+  if (password !== confirm) {
+    return res.status(400).json({ message: "password does not match" });
+  }
+  if (password.length > 6) {
+    return res.status(400).json({ message: "Password less than 6 characters" });
+  }
   // creating new object
   try {
     const user = new User(req.body);
@@ -38,25 +60,38 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    // condition if use exist
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "user does not exist",
+exports.updateUser = async (req, res, next) => {
+  const { role, id } = req.body;
+  // Verifying if role and id is presnt
+  if (role && id) {
+    // Verifying if the value of role is admin
+    if (role === "admin") {
+      try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+          new: true,
+          runValidators: true,
+        });
+        // condition if use exist
+        if (!user) {
+          return res.status(404).json({
+            success: false,
+            message: "user does not exist",
+          });
+        }
+        return res.json({ success: true, user });
+      } catch (error) {
+        return res.status(404).json({
+          success: false,
+          message: error.message,
+        });
+      }
+    } else {
+      res.status(400).json({
+        message: "Role is not admin",
       });
     }
-    return res.json({ success: true, user });
-  } catch (error) {
-    return res.status(404).json({
-      success: false,
-      message: error.message,
-    });
+  } else {
+    res.status(400).json({ message: "Role or Id not present" });
   }
 };
 
@@ -76,43 +111,4 @@ exports.DeleteUser = async (req, res) => {
       message: error.message,
     });
   }
-};
-
-exports.userPay = async (req, res) => {
-  // let history = [];
-  // let transactionData = {};
-  // req.body.cartDetail.forEach((items) => {
-  //   history.push({
-  //     dateOfpurchase: Date.now(),
-  //     name: items.name,
-  //     id: items.id,
-  //     price: items.price,
-  //     quantity: items.quantity,
-  //     paymentId: req.body.paymentData.paymentID,
-  //   });
-  //   //  payment information
-  //   // transactionData.user = {
-  //   //   id: req.user._id,
-  //   //   name: req.user.name,
-  //   //   lastname: req.user.lastname,
-  //   //   email: req.user.email,
-  //   // };
-  //   transactionData.data = req.body.paymentData;
-  //   transactionData.product = history;
-
-  //   // updating the array in user
-  //   User.findOneAndUpdate(
-  //     { _id: 1 },
-  //     { $push: { history: history } },
-  //     { new: true },
-  //     (err, user) => {
-  //       if (err) return res.json({ success: false, err });
-  //       const payment = new Payment(transactionData);
-  //       payment.save((err, doc) => {
-  //         if (err) return res.json({ success: false.valueOf, err });
-  //       });
-  //     }
-  //   );
-  // });
-  console.log(req.body);
 };

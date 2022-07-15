@@ -6,20 +6,12 @@ const validator = require("validator");
 const userSchema = mongoose.Schema({
   // object describing the shape of document
   // includig validation
-  name: {
+  role: {
     type: String,
     minlenth: 3,
     maxlength: 20,
     required: true,
-  },
-
-  age: {
-    type: Number,
-    validate(value) {
-      if (value < 18) {
-        throw new Error(`age cannot be less than 18`);
-      }
-    },
+    default: "user",
   },
   email: {
     type: String,
@@ -29,16 +21,16 @@ const userSchema = mongoose.Schema({
       }
     },
   },
+  confirm: {
+    type: String,
+  },
   password: {
     type: String,
+    minlength: 6,
     required: true,
-  },
-  history: {
-    type: Array,
-    default: [],
   },
 });
 // model is used to store data in database
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 // exporting
 module.exports = User;
