@@ -6,11 +6,13 @@ export default function Update() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [desc, setDesc] = useState("");
+  const [cat, setCart] = useState("");
   const [instore, setInstore] = useState(false);
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
   };
+  console.log(cat);
   console.log(file);
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +59,31 @@ export default function Update() {
             type="number"
             onChange={(e) => setPrice(e.target.value)}
           />
+        </div>
+        <div>
+          <select
+            name="cars"
+            id="cars"
+            className="p-4 w-[200px] border-b-2 border-gray-500 outline-none uppercase text-sm"
+            onChange={(e) => setCart(e.target.value)}
+          >
+            <option value="herbcide">herbcide</option>
+            <option value="pestcide" className="uppercase text-sm">
+              pestcide
+            </option>
+            <option value="simlawseed" className="uppercase text-sm">
+              simlawseed
+            </option>
+            <option value="fertilizer" className="uppercase text-sm">
+              fertilizer
+            </option>
+            <option value="insectcide" className="uppercase text-sm">
+              insectcide
+            </option>
+            <option value="animal feed" className="uppercase text-sm">
+              animal $ bird feeds
+            </option>
+          </select>
         </div>
         <div className="flex gap-10 mb-10 w-full ml-[50%] items-center">
           <label>instore</label>

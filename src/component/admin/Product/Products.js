@@ -29,8 +29,9 @@ export default function Products() {
             <td>
               <Link to="/update">
                 {" "}
-                <button className="bg-green-200 p-2 rounded w-[100px]">
-                  edit
+                <button className="bg-green-100  w-[100px] p-2 rounded flex items-center justify-center">
+                  {" "}
+                  <i className="bi bi-pen-fill"></i>
                 </button>
               </Link>
             </td>

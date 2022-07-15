@@ -1,27 +1,37 @@
 import React from "react";
 import { useState } from "react";
-import styled from "styled-components";
-import Footer from "../footer/Footer";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../Redux/Apicall";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
-  const [name, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassord] = useState("");
-  // register dtail catching
-  const [email1, setEmail1] = useState("");
-  const [password1, setPassord1] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState("");
+  let navigate = useNavigate();
+  console.log(error.message);
+
   console.log(confirm);
   const dispatch = useDispatch();
 
   // fuction to submit value login
   const SubmitData = (e) => {
     e.preventDefault();
-    updateUser({ name, password }, dispatch);
+    updateUser({ email, password }, dispatch, navigate);
   };
   // function to subbmit register
-  const SubmitRegister = (e) => {
-    e.preventDeafult();
+  const SubmitRegister = async (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/user", { email, password, confirm })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setError(error.response.data);
+      });
   };
   return (
     <div className="grid grid-cols-2 pt-[100px]">
@@ -30,7 +40,7 @@ export default function Login() {
         <form className=" w-[70%]  rounded shadow-xl p-3" onSubmit={SubmitData}>
           <span className="font-bold uppercase mx-[50%] ">login</span>
           <div className="flex justify-around items-center mt-4">
-            <span className="uppercase font-light">name:</span>
+            <span className="uppercase font-light">email:</span>
             <input
               type="text"
               required
@@ -68,7 +78,7 @@ export default function Login() {
               type="text"
               required
               className="p-3 ml-[106px] outline-none border-b-2 border-gray-500 bg-gray-100"
-              onChange={(e) => setEmail1(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="flex justify-around mt-3 items-center ">
@@ -77,7 +87,7 @@ export default function Login() {
               type="text"
               required
               className="p-3 ml-20 border-b-2 border-gray-500 outline-none bg-gray-100"
-              onChange={(e) => setPassord1(e.target.value)}
+              onChange={(e) => setPassord(e.target.value)}
             />
           </div>
           <div className="flex justify-around mt-3 items-center">
@@ -89,6 +99,7 @@ export default function Login() {
               onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
+          {/* error show box */}
           <button className="p-3 bg-gray-500 w-[150px] rounded mx-[40%] my-4 text-white">
             send
           </button>

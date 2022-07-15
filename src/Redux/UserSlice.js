@@ -6,7 +6,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     userInfo: {
-      name: "",
+      email: "",
       password: "",
     },
     pending: false,

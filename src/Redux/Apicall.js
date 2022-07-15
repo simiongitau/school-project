@@ -1,13 +1,14 @@
 import axios from "axios";
 import { updateStart, updateError, updateSuccess } from "./UserSlice";
 //  creating a function
-export const updateUser = async (login, dispatch) => {
+export const updateUser = async (login, dispatch, navigate) => {
   dispatch(updateStart());
   // making api call
   try {
-    const res = await axios.post("http://localhost:5000/user", login);
+    const res = await axios.post("http://localhost:5000/user/login", login);
     dispatch(updateSuccess(res.data));
     console.log(res.data);
+    navigate("/home");
   } catch (error) {
     dispatch(updateError());
   }
@@ -23,6 +24,7 @@ export const fetchUser = async (dispatch) => {
       console.log(response);
     })
     .catch((error) => {
+      console.log(error);
       dispatch(updateError(error));
     });
 };
