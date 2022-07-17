@@ -21,3 +21,31 @@ exports.updateProduct = async (req, res, next) => {
     });
   }
 };
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "product does not exist",
+      });
+    }
+    return res.json({ success: true, product });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+exports.getProducts = async (req, res) => {
+  // find is used to retrive or fetch data from the mongo db
+  const product = await Product.find();
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      message: "product does not exist",
+    });
+  }
+  return res.json({ success: true, product });
+};

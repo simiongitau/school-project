@@ -1,6 +1,6 @@
 const User = require("../model/User");
 exports.getAllUser = async (req, res) => {
-  // find is used to retrive or fertch data from the mongo db
+  // find is used to retrive or fetch data from the mongo db
   const user = await User.find();
   if (!user) {
     return res.status(404).json({
