@@ -1,40 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const userSlice = createSlice({
+const deliverSlice = createSlice({
   // store name user
   //this is our state
-  name: "user",
+  name: "deliver",
   initialState: {
-    userInfo: {
-      email: "",
-      password: "",
-    },
+    deliverInfo: localStorage.getItem("deliver")
+      ? JSON.parse(localStorage.getItem("deliver"))
+      : [],
     pending: false,
     error: false,
   },
   reducers: {
     // update action or update method
-    updateStart: (state) => {
+    deliverStart: (state) => {
       state.pending = true;
     },
-    updateSuccess: (state, action) => {
+    deliverSuccess: (state, action) => {
       state.pending = false;
       // updating the user
-      state.userInfo = action.payload;
+      state.deliverInfo = action.payload;
+      localStorage.setItem("deliver", JSON.stringify(state.deliverInfo));
     },
     // if error occur
-    updateError: (state) => {
+    deliverError: (state) => {
       state.error = true;
       state.pending = false;
     },
     //   nothing require or update the value so no need of payload
-    remove: (state) => {
-      state.userInfo = null;
-    },
   },
 });
 // exporting the action or the method that will be used in updating the value
-export const { updateStart, updateError, updateSuccess, remove } =
-  userSlice.actions;
+export const { deliverStart, deliverError, deliverSuccess } =
+  deliverSlice.actions;
 // exporting reducer to use in store
-export default userSlice.reducer;
+export default deliverSlice.reducer;

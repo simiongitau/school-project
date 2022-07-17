@@ -1,7 +1,7 @@
 import React from "react";
-import Side from "../side/Side";
 import product from "../../Data";
 import styled from "styled-components";
+import axios from "axios";
 import Products from "./Products";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +22,19 @@ export default function Product() {
     flex: 10;
     height: 90vh;
   `;
+  const fetchData = async () => {
+    await axios
+      .get(`http://localhost:5000/products`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   const carts = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {

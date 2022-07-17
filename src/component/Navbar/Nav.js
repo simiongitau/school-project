@@ -5,10 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getTotals } from "../../Redux/cartSlice";
 import { fetchUser } from "../../Redux/Apicall";
-import axios from "axios";
 // import { updateUser } from "../../Redux/Apicall";
 export default function Nav() {
-  // accesing the state from the component
+  // accessing the state from the component
   // state user belong from the store
   const name = useSelector((state) => state.user.userInfo);
   const cartsQuantity = useSelector((state) => state.cart.cartTotalQuantity);

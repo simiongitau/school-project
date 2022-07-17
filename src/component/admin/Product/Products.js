@@ -1,10 +1,12 @@
 import React from "react";
-import styled from "styled-components";
 import imj from "../../../assert/dap.jpg";
 import { Link } from "react-router-dom";
 export default function Products() {
   return (
-    <div className="">
+    <div className="relative">
+      <button className="top-0 absolute right-1 p-3 rounded bg-gray-200">
+        add
+      </button>
       <table className="table-auto w-[95%] mx-auto">
         <thead>
           <tr className="h-[80px] border-b-2 border-gray-300">

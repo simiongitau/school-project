@@ -12,11 +12,11 @@ const cartSlice = createSlice({
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
   },
-  //   methods that acess the state and provide action to change the value
+  //   methods that access the state and provide action to change the value
   reducers: {
     //   first action method
     addToCart(state, action) {
-      // use action.payload because the value are acqure from external component
+      // use action.payload because the value are acquire from external component
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );

@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useEffect } from "react";
+import getTotalsSales from "../../../Redux/orderSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { Doughnut } from "react-chartjs-2";
+import { fetchOrder } from "../../../Redux/Apicall";
 import { Chart as ChartJS } from "chart.js/auto";
 export default function Analysis() {
   const Container = styled.div``;
@@ -42,7 +46,12 @@ export default function Analysis() {
       },
     ],
   };
-
+  const totalSale = useSelector((state) => state.order.orderInfo.total);
+  console.log("totalSale" + totalSale);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchOrder(dispatch);
+  }, [dispatch]);
   return (
     <Container className="flex flex-col">
       <Top>

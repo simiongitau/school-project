@@ -1,5 +1,7 @@
 import axios from "axios";
 import { updateStart, updateError, updateSuccess } from "./UserSlice";
+import { orderStart, orderError, orderSuccess } from "./orderSlice";
+import { deliverStart, deliverError, deliverSuccess } from "./deliverSlice";
 //  creating a function
 export const updateUser = async (login, dispatch, navigate) => {
   dispatch(updateStart());
@@ -26,5 +28,32 @@ export const fetchUser = async (dispatch) => {
     .catch((error) => {
       console.log(error);
       dispatch(updateError(error));
+    });
+};
+
+export const fetchOrder = async (dispatch) => {
+  dispatch(orderStart());
+  await axios
+    .get(`http://localhost:5000/order`)
+    .then((response) => {
+      dispatch(orderSuccess(response.data));
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(orderError(error));
+    });
+};
+export const fetchDeliver = async (dispatch) => {
+  dispatch(deliverStart());
+  await axios
+    .get(`http://localhost:5000/deliver`)
+    .then((response) => {
+      dispatch(deliverSuccess(response.data));
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch(deliverError(error));
     });
 };

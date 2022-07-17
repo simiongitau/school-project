@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function Update() {
   const [file, setFile] = useState("");
@@ -8,6 +9,7 @@ export default function Update() {
   const [desc, setDesc] = useState("");
   const [cat, setCart] = useState("");
   const [instore, setInstore] = useState(false);
+  let navigate = useNavigate();
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
@@ -21,6 +23,7 @@ export default function Update() {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("desc", desc);
+    formData.append("cat", cat);
     formData.append("instore", instore);
     try {
       await axios.post("http://localhost:5000/uploadImage", formData, {
@@ -28,6 +31,7 @@ export default function Update() {
           "Content-Type": "multipart/form-data",
         },
       });
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -38,36 +42,43 @@ export default function Update() {
   return (
     <div className=" flex justify-center items-center h-screen">
       <form
-        className="w-1/2 p-10 rounded flex items-center flex-col shadow-xl"
+        className=" p-10 rounded flex  flex-col shadow-xl bg-slate-200"
         action="submit"
         onSubmit={onSubmit}
       >
-        <div className="flex gap-10 mb-10  w-full ml-[60%]">
-          <label className="uppercase my-auto">name</label>
+        <div className="flex  mb-10 ">
+          <label className="uppercase my-auto">name:</label>
           <input
-            className=" p-3 border-b-2  bg-gray-100 outline-none"
+            className=" p-3 border-b-2 ml-[70px] bg-gray-100 outline-none"
             required
             type="text"
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="flex gap-10 mb-10   w-full ml-[60%]">
-          <label className="uppercase my-auto">price</label>
+        <div className="flex gap-10 mb-10 ">
+          <label className="uppercase my-auto">price:</label>
           <input
-            className=" p-3 border-b-2 bg-gray-100 outline-none"
+            className=" p-3 border-b-2 bg-gray-100 outline-none ml-[35px]"
             required
             type="number"
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
-        <div>
+        <div className="flex my-3">
+          <label className="uppercase my-auto">categorly:</label>
           <select
             name="cars"
             id="cars"
-            className="p-4 w-[200px] border-b-2 border-gray-500 outline-none uppercase text-sm"
+            className="p-4 w-[275px] border-b-2 border-gray-500 outline-none uppercase text-sm ml-8"
             onChange={(e) => setCart(e.target.value)}
           >
-            <option value="herbcide">herbcide</option>
+            <option value="" className="uppercase text-sm">
+              * select categoly*
+            </option>
+
+            <option value="herbcide" className="uppercase text-sm">
+              herbcide
+            </option>
             <option value="pestcide" className="uppercase text-sm">
               pestcide
             </option>
@@ -85,8 +96,8 @@ export default function Update() {
             </option>
           </select>
         </div>
-        <div className="flex gap-10 mb-10 w-full ml-[50%] items-center">
-          <label>instore</label>
+        <div className="flex gap-10 mb-10 items-center ">
+          <label className="uppercase">instore:</label>
           <input
             className="w-20"
             type="radio"
@@ -94,19 +105,19 @@ export default function Update() {
             onClick={handleBoolen}
           />
         </div>
-        <div className="flex gap-10 mb-10">
-          <label className="uppercase my-auto">description</label>
+        <div className="flex gap-10 mb-10 ">
+          <label className="uppercase my-auto">info:</label>
           <textarea
-            className=" p-3 border-b-2 bg-gray-100 "
+            className=" w-[280px] p-3 border-b-2 bg-gray-100 ml-10 "
             required
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
-        <div className="flex w-[50%]">
-          <label className="mr-20">image</label>
-          <div className="bg-gray-500 w-[150px] rounde">
+        <div className="flex ">
+          <label className="my-auto uppercase">image:</label>
+          <div className="bg-gray-500 rounded w-[60%] ml-20">
             <input
-              className="p-2 opacity-5 cursor-pointer "
+              className="p-2 opacity-5 cursor-pointer"
               type="file"
               required
               onChange={onChange}
@@ -115,7 +126,7 @@ export default function Update() {
         </div>
         <button
           type="submit"
-          className="p-3 bg-gray-300 rounded mt-6 w-[150px] ml-10"
+          className="p-3 bg-gray-300 rounded w-[150px] mx-auto mt-4 "
         >
           send
         </button>
