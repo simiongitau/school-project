@@ -16,7 +16,13 @@ const deliverlySchema = new mongoose.Schema({
   telphone_number: { type: Number },
   county: { type: String },
   location: { type: String },
-  product_name: [String],
+  product: {
+    type: Array,
+  },
+  status: {
+    type: String,
+    default: false,
+  },
 });
 const Deliver = mongoose.model("Deliver", deliverlySchema);
 module.exports = Deliver;

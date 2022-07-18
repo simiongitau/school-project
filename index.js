@@ -93,11 +93,7 @@ app.post("/successBuy", async (req, res) => {
       email: req.body?.paymentData?.email,
       total: req.body?.total,
     });
-    let info = {
-      product_name: "spinach",
-      product_quantity: "6",
-    };
-    console.log(info);
+
     const deliver = new Deliver({
       paymentID: req.body?.paymentData?.paymentID,
       quantity: req.body?.cartsQuantity,
@@ -105,9 +101,7 @@ app.post("/successBuy", async (req, res) => {
       telphone_number: req.body?.transport?.telNumber,
       county: req.body?.transport?.county,
       location: req.body?.transport?.location,
-      $push: {
-        product_name: info,
-      },
+      product: req.body?.cartDetail,
     });
 
     await order.save(), deliver.save();

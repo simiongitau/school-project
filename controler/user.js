@@ -22,7 +22,7 @@ exports.login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email, password });
     if (!user) {
-      res.status(401).json({
+      return res.status(401).json({
         message: "Login not successful",
         error: "User not found",
       });
