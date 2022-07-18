@@ -29,9 +29,9 @@ const orderSlice = createSlice({
       state.pending = false;
     },
     getTotalsSales(state) {
-      let { total } = state.orderInfo;
-      let sum = total + total;
-      state.totalSale = sum;
+      let updateTotalSale = state.orderInfo.total;
+      updateTotalSale += updateTotalSale;
+      state.totalSale = updateTotalSale;
     },
     //   nothing require or update the value so no need of payload
   },

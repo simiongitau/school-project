@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../Redux/Apicall";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const Error = useSelector((state) => state.user.error);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
@@ -41,6 +42,11 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {Error === true ? (
+          <h1 className="text-red-500 my-2">incorrect credial?</h1>
+        ) : (
+          ""
+        )}
         <button className="bg-gray-300 p-3 w-[150px] rounded my-auto">
           send
         </button>

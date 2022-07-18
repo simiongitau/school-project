@@ -38,6 +38,12 @@ export const fetchOrder = async (dispatch) => {
     .then((response) => {
       dispatch(orderSuccess(response.data));
       console.log(response);
+
+      // console Date
+      console.log(
+        "The date is: ",
+        new Date(response.data?.order[0]?.updatedAt).toLocaleDateString()
+      );
     })
     .catch((error) => {
       console.log(error);

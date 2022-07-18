@@ -46,8 +46,9 @@ export default function Analysis() {
       },
     ],
   };
-  const totalSale = useSelector((state) => state.order.orderInfo.total);
+  const totalSale = useSelector((state) => state.order?.totalSale);
   console.log("totalSale" + totalSale);
+
   const dispatch = useDispatch();
   useEffect(() => {
     fetchOrder(dispatch);

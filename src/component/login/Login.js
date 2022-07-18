@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../Redux/Apicall";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassord] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [error, setError] = useState("");
+  const Error = useSelector((state) => state.user.error);
   let navigate = useNavigate();
-  console.log(error.message);
+  console.log(Error);
 
   console.log(confirm);
   const dispatch = useDispatch();
@@ -30,14 +30,16 @@ export default function Login() {
       })
       .catch(function (error) {
         console.log(error);
-        setError(error.response.data);
       });
   };
   return (
     <div className="grid grid-cols-2 pt-[100px]">
       {/* login div */}
       <div className="p-10 flex justify-center">
-        <form className=" w-[70%]  rounded shadow-xl p-3" onSubmit={SubmitData}>
+        <form
+          className=" w-[70%]  rounded shadow-xl p-3 bg-gray-200"
+          onSubmit={SubmitData}
+        >
           <span className="font-bold uppercase mx-[50%] ">login</span>
           <div className="flex justify-around items-center mt-4">
             <span className="uppercase font-light">email:</span>
@@ -57,8 +59,15 @@ export default function Login() {
               onChange={(e) => setPassord(e.target.value)}
             />
           </div>
+          <div className="flex justify-center items-center">
+            {Error === true ? (
+              <h1 className="text-red-500 text-lg my-2">incorrect credial</h1>
+            ) : (
+              ""
+            )}
+          </div>
           <button
-            className="bg-gray-600 p-3 w-[150px] rounded mt-20 mx-[40%] text-white"
+            className="bg-gray-600 p-3 w-[150px] rounded  mx-[40%] text-white my-[20px]"
             type="submit"
           >
             send
@@ -68,7 +77,7 @@ export default function Login() {
       {/* register div */}
       <div className=" p-10 justify-center">
         <form
-          className="w-[80%] shadow-xl  rounded p-4"
+          className="w-[80%] shadow-xl bg-gray-200 rounded p-4"
           onSubmit={SubmitRegister}
         >
           <span className="font-bold uppercase mx-[40%] ">register</span>
