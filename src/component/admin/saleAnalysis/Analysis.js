@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { useEffect } from "react";
 import getTotalsSales from "../../../Redux/orderSlice";
@@ -37,8 +37,55 @@ export default function Analysis() {
   // const Fig=styled.h3`
   // margin:left:0px;
   // `;
+  const [chartMonths, setChatMonths] = useState([]);
+
+  const Data = useSelector((state) => state.order?.orderInfo);
+  const MONTHS = useMemo(
+    () => [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const months = Object.entries(
+      Data.reduce((b, a) => {
+        let m = a.updatedAt.split("T")[0].substr(0, 7) + "-01";
+        if (b.hasOwnProperty(m)) b[m].push(a);
+        else b[m] = [a];
+        return b;
+      }, {})
+    )
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map((e) => ({ [e[0]]: e[1] }));
+
+    let mArr = [];
+    months.forEach((item) => {
+      const key = Object.keys(item)[0];
+      const monthOfDate = MONTHS[new Date(key).getMonth()];
+      mArr.push(monthOfDate);
+    });
+
+    setChatMonths(mArr);
+  }, []);
+
+  const Time = new Date(Data?.updatedAt).toLocaleDateString();
+  // console.log(Time);
+  const lastData = Data.total;
+  // console.log(Data);
   const data = {
-    labels: ["januarly", "febluarly", "march"],
+    labels: [chartMonths],
     datasets: [
       {
         data: [40, 5, 15],
@@ -47,7 +94,7 @@ export default function Analysis() {
     ],
   };
   const totalSale = useSelector((state) => state.order?.totalSale);
-  console.log("totalSale" + totalSale);
+  // console.log("totalSale" + totalSale);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -62,7 +109,7 @@ export default function Analysis() {
         </div>
         <div>
           <span>total sales</span>
-          <h3>230,000ksh</h3>
+          <h3 className="font-bold uppercase">{totalSale} kesh</h3>
         </div>
       </Top>
       <div className="flex justify-around h-[380px] pt-2">

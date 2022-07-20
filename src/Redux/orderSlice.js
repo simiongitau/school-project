@@ -20,7 +20,9 @@ const orderSlice = createSlice({
     orderSuccess: (state, action) => {
       state.pending = false;
       // updating the user
-      state.orderInfo = action.payload;
+      state.orderInfo = action.payload.orders;
+      state.totalSale = action.payload.grandTotal;
+
       localStorage.setItem("order", JSON.stringify(state.orderInfo));
     },
     // if error occur
@@ -30,7 +32,7 @@ const orderSlice = createSlice({
     },
     getTotalsSales(state) {
       let updateTotalSale = state.orderInfo.total;
-      updateTotalSale += updateTotalSale;
+      updateTotalSale = updateTotalSale + updateTotalSale;
       state.totalSale = updateTotalSale;
     },
     //   nothing require or update the value so no need of payload

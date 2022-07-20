@@ -36,9 +36,23 @@ export const fetchOrder = async (dispatch) => {
   await axios
     .get(`http://localhost:5000/order`)
     .then((response) => {
-      dispatch(orderSuccess(response.data));
-      console.log(response);
+      // console.log(response);
 
+      const fetchedOrders = response.data?.order;
+      const paidOrders = fetchedOrders.filter((item) => item?.paid === "true");
+
+      const totalPaidOrdersAmount = paidOrders.reduce(function (acc, obj) {
+        return acc + parseInt(obj.total);
+      }, 0);
+
+      dispatch(
+        orderSuccess({
+          orders: response.data.order,
+          grandTotal: totalPaidOrdersAmount,
+        })
+      );
+
+      console.log(paidOrders);
       // console Date
       console.log(
         "The date is: ",
