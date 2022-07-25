@@ -38,8 +38,9 @@ export default function Analysis() {
   // margin:left:0px;
   // `;
   const [chartMonths, setChatMonths] = useState([]);
-
+  const [chartDart, setChartData] = useState("");
   const Data = useSelector((state) => state.order?.orderInfo);
+  console.log(Data);
   const MONTHS = useMemo(
     () => [
       "January",
@@ -70,32 +71,52 @@ export default function Analysis() {
       .sort((a, b) => a[0].localeCompare(b[0]))
       .map((e) => ({ [e[0]]: e[1] }));
 
+    // total
+    // const Total = Object.entries(
+    //   Data.reduce((b, a) => {
+    //     let m = a.total.split("T")[0].substr(0, 7) + "-01";
+    //     if (b.hasOwnProperty(m)) b[m].push(a);
+    //     else b[m] = [a];
+    //     return b;
+    //   }, {})
+    // )
+    //   .sort((a, b) => a[0].localeCompare(b[0]))
+    //   .map((e) => ({ [e[0]]: e[1] }));
+    // console.log("total is", Total);
+
     let mArr = [];
+    let monthlyTotals = [];
     months.forEach((item) => {
       const key = Object.keys(item)[0];
       const monthOfDate = MONTHS[new Date(key).getMonth()];
       mArr.push(monthOfDate);
+      // console.log("Key is", item);
+      const arrayOfProducts = Object.values(item)[0];
+
+      const totalMonth = arrayOfProducts.reduce(function (acc, obj) {
+        return acc + parseInt(obj.total);
+      }, 0);
+
+      // console.log("The month total is:", totalMonth);
+      monthlyTotals.push(totalMonth);
     });
-
+    // console.log("Month Array ", mArr);
     setChatMonths(mArr);
+    console.log(chartMonths);
+    setChartData(monthlyTotals);
   }, []);
-
-  const Time = new Date(Data?.updatedAt).toLocaleDateString();
-  // console.log(Time);
-  const lastData = Data.total;
   // console.log(Data);
   const data = {
-    labels: [chartMonths],
+    labels: chartMonths,
     datasets: [
       {
-        data: [40, 5, 15],
+        data: chartDart,
         backgroundColor: ["#a78bfa", "#fde047", "white"],
       },
     ],
   };
   const totalSale = useSelector((state) => state.order?.totalSale);
   // console.log("totalSale" + totalSale);
-
   const dispatch = useDispatch();
   useEffect(() => {
     fetchOrder(dispatch);
