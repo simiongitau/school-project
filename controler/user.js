@@ -46,9 +46,10 @@ exports.createUser = async (req, res) => {
   if (password !== confirm) {
     return res.status(400).json({ message: "password does not match" });
   }
-  if (password.length > 6) {
-    return res.status(400).json({ message: "Password less than 6 characters" });
-  }
+
+  // if (password.length < 6) {
+  //   return res.status(400).json({ message: false });
+  // }
   // creating new object
   try {
     const user = new User(req.body);
