@@ -1,7 +1,19 @@
 const User = require("../model/User");
 exports.getAllUser = async (req, res) => {
   // find is used to retrive or fetch data from the mongo db
-  const user = await User.find();
+  const user = await User.find({ role: "user" });
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      message: "user does not exist",
+    });
+  }
+  return res.json({ success: true, user });
+};
+// getting all the admin
+exports.getAlladmin = async (req, res) => {
+  // find is used to retrive or fetch data from the mongo db
+  const user = await User.find({ role: "admin" });
   if (!user) {
     return res.status(404).json({
       success: false,

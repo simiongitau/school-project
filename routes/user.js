@@ -7,10 +7,12 @@ const {
   createUser,
   updateUser,
   DeleteUser,
+  getAlladmin,
 } = require("../controler/user");
 
 // fetching user data
 router.get("/user", getAllUser);
+router.get("/user/admin", getAlladmin);
 // ftching one user
 router.post("/user/login", login);
 // user
