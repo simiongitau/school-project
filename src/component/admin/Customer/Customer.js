@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Customer() {
   const Wrapper = styled.div`
     display: flex;
@@ -13,6 +13,46 @@ export default function Customer() {
   const Top = styled.div`
     flex: 4;
   `;
+  const [user, setUser] = useState("");
+  const [admin, setAdmin] = useState("");
+  // console.log(user.user);
+  console.log(admin.user);
+  const getUser = async () => {
+    axios
+      .get("http://localhost:5000/user")
+      .then((response) => {
+        const res = response.data;
+        setUser(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getAdmin = async () => {
+    await axios
+      .get("http://localhost:5000/user/admin")
+      .then((response) => {
+        setAdmin(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    // Promise.all([getUser(), getAdmin()]).then(function (results) {
+    //   const acct = results[0].data.user;
+    //   console.log(acct);
+    //   setUser(acct);
+    //   const perm = results[1];
+    //   setAdmin(perm);
+    // });
+    getUser();
+    getAdmin();
+  }, []);
+  // handle delete
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:5000/user/delete/${id}`);
+  };
   const [click, setClick] = useState(false);
   console.log(click);
   const handleUpdate = () => {
@@ -40,7 +80,8 @@ export default function Customer() {
     );
   };
   return (
-    <Wrapper>
+    <div className="flex">
+      {/* top */}
       <Top>
         <span style={{ marginLeft: "150px", textTransform: "uppercase" }}>
           registered customers
@@ -48,32 +89,30 @@ export default function Customer() {
         <table className="table-auto w-[95%] mx-auto">
           <thead>
             <tr className="h-[80px] border-b-2 border-gray-300">
-              <th>email</th>
-              <th>password</th>
-              <th>delete</th>
+              <th className="text-center">email</th>
+              <th className="text-center">password</th>
+              <th className="text-center">delete</th>
             </tr>
           </thead>
-          <tbody className="">
-            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
-              <td>simio#3gmail.com</td>
-              <td>nairobi</td>
-              <td>
-                <button className="bg-red-200 p-2 rounded w-[100px]">
-                  delete
-                </button>
-              </td>
-            </tr>
-            <tr className="h-20 border-gray-300 border-b-2  bg-gray-100">
-              <td>evans mwangi</td>
-              <td>0994955</td>
-              <td>eldoret</td>
-            </tr>
-            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100 ">
-              <td>ty</td>
-              <td>093993993</td>
-              <td>kitale</td>
-            </tr>
-          </tbody>
+          {user.user?.map((e) => (
+            <tbody className="">
+              <tr
+                className="h-20 border-gray-300 border-b-2 bg-gray-100"
+                key={e._id}
+              >
+                <td className="text-center">{e.email}</td>
+                <td className="text-center p-4">{e.password}</td>
+                <td>
+                  <button
+                    className="bg-red-200 p-2 rounded w-[100px] text-center"
+                    onClick={() => handleDelete(e._id)}
+                  >
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
       </Top>
       <Admin>
@@ -83,47 +122,37 @@ export default function Customer() {
         <table className="table-auto w-[95%] mx-auto">
           <thead>
             <tr className="h-[80px] border-b-2 border-gray-300">
-              <th>email</th>
+              <th className="text-center ">email</th>
               <th>password</th>
-              <th>update</th>
+              <th className="text-center">update</th>
               <th>delete</th>
             </tr>
           </thead>
-          <tbody className="">
-            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
-              <td>simio#3gmail.com</td>
-              <td>nairobi</td>
-              <td>
-                <button
-                  className="bg-green-100  w-[100px] p-2 rounded flex items-center justify-center"
-                  onClick={(e) => setClick(true)}
-                >
-                  <i className="bi bi-pen-fill"></i>
-                </button>
-              </td>
-              <td>
-                {" "}
-                <button className="bg-red-200 p-2 rounded w-[100px]">
-                  delete
-                </button>
-              </td>
-            </tr>
-            <tr className="h-20 border-gray-300 border-b-2  bg-gray-100">
-              <td>evans mwangi</td>
-              <td>0994955</td>
-              <td>eldoret</td>
-              <td>kapsoya</td>
-            </tr>
-            <tr className="h-20 border-gray-300 border-b-2 bg-gray-100 ">
-              <td>093993993</td>
-              <td>kitale</td>
-              <td>town</td>
-              <td>hjgjfggk</td>
-            </tr>
-          </tbody>
+          {admin.user?.map((t) => (
+            <tbody className="">
+              <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
+                <td className="text-center">{t.email}</td>
+                <td>{t.password}</td>
+                <td className="text-center">
+                  <button
+                    className="bg-green-100  w-[100px] p-2 rounded"
+                    onClick={(e) => setClick(true)}
+                  >
+                    <i className="bi bi-pen-fill"></i>
+                  </button>
+                </td>
+                <td>
+                  {" "}
+                  <button className="bg-red-200 p-2 rounded w-[100px]">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          ))}
         </table>
         {click === true ? <div>{handleUpdate()}</div> : ""}
       </Admin>
-    </Wrapper>
+    </div>
   );
 }
