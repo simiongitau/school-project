@@ -49,3 +49,14 @@ exports.getProducts = async (req, res) => {
   }
   return res.json({ success: true, product });
 };
+// get specific product
+exports.getproductSpecific = async (req, res) => {
+  console.log(req.params.productID);
+  Product.findOne({ _id: req.params.productID }, function (err, response) {
+    if (response) {
+      res.send(response);
+    } else {
+      res.send("No product matching that id was found.");
+    }
+  });
+};

@@ -53,7 +53,7 @@ const imageUpload = multer({
     fileSize: 1000000, // 1000000 Bytes = 1 MB
   },
   fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(png|jpg)$/)) {
+    if (!file.originalname.match(/\.(jpeg|jpg)$/)) {
       // upload only png and jpg format
       return cb(new Error("Please upload a Image"));
     }
@@ -97,7 +97,7 @@ app.post("/successBuy", async (req, res) => {
     const deliver = new Deliver({
       paymentID: req.body?.paymentData?.paymentID,
       quantity: req.body?.cartsQuantity,
-      email: "simion33@gmail.com",
+      email: req.body?.transport?.name,
       telphone_number: req.body?.transport?.telNumber,
       county: req.body?.transport?.county,
       location: req.body?.transport?.location,
