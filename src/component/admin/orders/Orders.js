@@ -66,16 +66,16 @@ export default function Orders() {
       <table className="table-auto w-[95%] mx-auto">
         <thead>
           <tr className="h-[80px] border-b-2 border-gray-300">
-            <th className=" pl-20">paymentID </th>
-            <th>quantity</th>
-            <th className="pl-14">email</th>
-            <th>telephone number</th>
-            <th>county</th>
-            <th>pickup station</th>
-            <th>product name </th>
-            <th>update</th>
-            <th>clear/pending</th>
-            <th>delete</th>
+            <th className=" pl-20 uppercase font-light">paymentID </th>
+            <th className="uppercase font-light">quantity</th>
+            <th className="pl-14 uppercase font-light">email</th>
+            <th className="uppercase font-light">telephone number</th>
+            <th className="uppercase font-light">county</th>
+            <th className="uppercase font-light">pickup station</th>
+            <th className="uppercase font-light">product name </th>
+            <th className="uppercase font-light">update</th>
+            <th className="uppercase font-light">clear/pending</th>
+            <th className="uppercase font-light text-center">delete</th>
           </tr>
         </thead>
 

@@ -2,11 +2,11 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import handleUpdate from "./Adminupdate";
 export default function Customer() {
   const Wrapper = styled.div`
     display: flex;
   `;
-
   const Admin = styled.div`
     flex: 8;
   `;
@@ -39,13 +39,6 @@ export default function Customer() {
   };
 
   useEffect(() => {
-    // Promise.all([getUser(), getAdmin()]).then(function (results) {
-    //   const acct = results[0].data.user;
-    //   console.log(acct);
-    //   setUser(acct);
-    //   const perm = results[1];
-    //   setAdmin(perm);
-    // });
     getUser();
     getAdmin();
   }, []);
@@ -54,30 +47,9 @@ export default function Customer() {
     await axios.delete(`http://localhost:5000/user/delete/${id}`);
   };
   const [click, setClick] = useState(false);
-  console.log(click);
-  const handleUpdate = () => {
-    return (
-      <form className="w-[500px] h-[300px] bg-slate-200 rounded p-4 flex flex-col">
-        <h2 className="font-bold text-xl mx-auto uppercase">update</h2>
-        <div className="flex items-center">
-          <label className="uppercase">email:</label>
-          <input
-            className="p-3 my-2 ml-14 outline-none border-b-2 border-gray-800"
-            required
-          />
-        </div>
-        <div className="flex items-center">
-          <label className="uppercase">password:</label>
-          <input
-            className="p-3 ml-4 outline-none border-b-2 border-gray-800"
-            required
-          />
-        </div>
-        <button className="w-[150px] rounded bg-gray-500 p-3 m-auto ">
-          send
-        </button>
-      </form>
-    );
+  // methode to handle delete
+  const HandledeleteAdmin = async (id) => {
+    await axios.delete(`http://localhost:5000/user/delete/${id}`);
   };
   return (
     <div className="flex">
@@ -89,9 +61,9 @@ export default function Customer() {
         <table className="table-auto w-[95%] mx-auto">
           <thead>
             <tr className="h-[80px] border-b-2 border-gray-300">
-              <th className="text-center">email</th>
-              <th className="text-center">password</th>
-              <th className="text-center">delete</th>
+              <th className="text-center uppercase font-light">email</th>
+              <th className="text-center uppercase font-light">password</th>
+              <th className="text-center uppercase font-light">delete</th>
             </tr>
           </thead>
           {user.user?.map((e) => (
@@ -100,8 +72,10 @@ export default function Customer() {
                 className="h-20 border-gray-300 border-b-2 bg-gray-100"
                 key={e._id}
               >
-                <td className="text-center">{e.email}</td>
-                <td className="text-center p-4">{e.password}</td>
+                <td className="text-center font-extralight">{e.email}</td>
+                <td className="text-center p-4 font-extralight">
+                  {e.password}
+                </td>
                 <td>
                   <button
                     className="bg-red-200 p-2 rounded w-[100px] text-center"
@@ -122,18 +96,18 @@ export default function Customer() {
         <table className="table-auto w-[95%] mx-auto">
           <thead>
             <tr className="h-[80px] border-b-2 border-gray-300">
-              <th className="text-center ">email</th>
-              <th>password</th>
-              <th className="text-center">update</th>
-              <th>delete</th>
+              <th className="text-center uppercase font-light ">email</th>
+              <th className="text-center uppercase font-light">password</th>
+              <th className="text-center font-light uppercase">update</th>
+              <th className="text-center font-light uppercase">delete</th>
             </tr>
           </thead>
           {admin.user?.map((t) => (
             <tbody className="">
               <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
-                <td className="text-center">{t.email}</td>
-                <td>{t.password}</td>
-                <td className="text-center">
+                <td className="text-center font-extralight">{t.email}</td>
+                <td className="text-center font-extralight">{t.password}</td>
+                <td className="text-center font-extralight">
                   <button
                     className="bg-green-100  w-[100px] p-2 rounded"
                     onClick={(e) => setClick(true)}
@@ -141,9 +115,11 @@ export default function Customer() {
                     <i className="bi bi-pen-fill"></i>
                   </button>
                 </td>
-                <td>
-                  {" "}
-                  <button className="bg-red-200 p-2 rounded w-[100px]">
+                <td className="text-center ">
+                  <button
+                    className="bg-red-200 p-2 rounded w-[100px]"
+                    onClick={() => HandledeleteAdmin(t._id)}
+                  >
                     delete
                   </button>
                 </td>

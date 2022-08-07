@@ -32,8 +32,8 @@ export default function Home() {
   `;
   return (
     <>
-      <Wrapper>
-        <Left>
+      <Wrapper className="">
+        <Left className="">
           <div>
             <button className="bg-gray-200 shadow-sm">sale analysis</button>
             <Link to="/product">

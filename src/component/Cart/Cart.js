@@ -107,7 +107,7 @@ export default function Cart() {
                 <div className="flex">
                   {/* image */}
                   <img
-                    src={cartItem.imagi}
+                    src={`http://localhost:5000/${cartItem.productImage}`}
                     alt="photos"
                     width="100px"
                     height="100px"
@@ -173,6 +173,7 @@ export default function Cart() {
                 className=" border-b-4 border-gray-400 bg-gray-100 p-3 w-[100%] ml-10 outline-none"
                 placeholder="mary muthoni"
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
             <div className="flex items-center">
@@ -182,6 +183,7 @@ export default function Cart() {
                 placeholder="07*********"
                 className="border-b-4 border-gray-400 bg-gray-100 p-3 w-[100%] ml-2 outline-none"
                 onChange={(e) => setTelNumber(e.target.value)}
+                required
               />
             </div>
             {/* county selection */}

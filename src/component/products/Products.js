@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addDetail, addToCart } from "../../Redux/cartSlice";
+import { getProduct } from "../../Redux/Apicall";
 export default function Products({ product }) {
   const Wrapper = styled.div`
     background-color: rgba(165, 173, 180, 0.842);
@@ -55,26 +56,29 @@ export default function Products({ product }) {
   `;
   // console.log(product);
   const dispatch = useDispatch();
-  const { name, imagi, price } = product;
+  const { name, price, productImage, _id } = product;
   // method to add items to cart
   const hanbleAddTocart = (product) => {
     // dispatch is used to update the state
     dispatch(addToCart(product));
   };
   // handle detail
+  const handleDetail = (id) => {
+    getProduct(id, dispatch);
+  };
   return (
     <div className="col-lg-3 col-sm-6">
       <Wrapper>
         {/* we have image */}
-        <img src={imagi} alt="photos" />
+        <img src={`http://localhost:5000/${productImage}`} alt="photos" />
         {/* div containing price and the name of product */}
         <Info>
-          <span>{name}</span> <span>{price}</span>
+          <span className="text-lg">{name}</span>{" "}
+          <span className="text-lg text-indigo-500 font-bold">{price}KESH</span>
         </Info>
         <Nav>
           <Link to="/detail">
-            {" "}
-            <button>maelezo</button>
+            <button onClick={() => handleDetail(_id)}>maelezo</button>
           </Link>
           <button onClick={() => hanbleAddTocart(product)}>add to cart</button>
         </Nav>

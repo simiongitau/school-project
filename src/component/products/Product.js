@@ -1,5 +1,4 @@
 import React from "react";
-import product from "../../Data";
 import styled from "styled-components";
 import axios from "axios";
 import Products from "./Products";
@@ -9,7 +8,8 @@ import { getTotals } from "../../Redux/cartSlice";
 import "./product.css";
 import Footer from "../footer/Footer";
 export default function Product() {
-  const [Data, setData] = useState(product);
+  const [Data, setData] = useState([]);
+  console.log(Data);
   const Main = styled.div`
     display: flex;
   `;
@@ -26,7 +26,7 @@ export default function Product() {
     await axios
       .get(`http://localhost:5000/products`)
       .then((response) => {
-        console.log(response);
+        setData(response.data.product);
       })
       .catch((error) => {
         console.log(error);
@@ -41,11 +41,10 @@ export default function Product() {
     dispatch(getTotals());
   }, [carts, dispatch]);
   // console.log(Data);
-  const filterSimlaw = (items) => {
-    const result = Data.filter((curData) => {
-      return curData.categorly === items;
-    });
-    setData(result);
+  console.log(Data.product);
+  const handleCategorly = (id) => {
+    const final = Data.filter((item) => item.category === id);
+    setData(final);
   };
   return (
     <>
@@ -56,44 +55,41 @@ export default function Product() {
           <div className="p-1 bg-gray-100 rounded"></div>
           <button
             className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("simlawseed")}
+            onClick={() => handleCategorly("simlawseed")}
           >
             simlawseed
           </button>
           <button
             className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("simlawseed")}
+            onClick={() => handleCategorly("pestcide")}
           >
             pestcide
           </button>
-          <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("fertilizer")}
-          >
+          <button className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase">
             fertilizer
           </button>
           <button
             className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("herbalcide")}
+            onClick={() => handleCategorly("herbcide")}
           >
             herbalcide
           </button>
           <button
             className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("simlawseed")}
+            onClick={() => handleCategorly("insectcide")}
           >
             insectside
           </button>
           <button
             className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
-            onClick={() => filterSimlaw("simlawseed")}
+            onClick={() => handleCategorly("animalbird")}
           >
             animal & bird feeds
           </button>
         </Light>
         <Right className="container">
           <div className="row">
-            {Data.map((product) => {
+            {Data?.map((product) => {
               return <Products product={product} key={product.name} />;
             })}
           </div>

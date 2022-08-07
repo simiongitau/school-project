@@ -3,6 +3,9 @@ import styled from "styled-components";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
 import gff from "../../assert/dap.jpg";
+import { useSelector } from "react-redux";
+import { addDetail, addToCart } from "../../Redux/cartSlice";
+import { useDispatch } from "react-redux";
 export default function Detail() {
   const Container = styled.div`
     display: flex;
@@ -58,15 +61,26 @@ export default function Detail() {
       }
     }
   `;
+  const dispatch = useDispatch();
+  const Detail = useSelector((state) => state.product.productInfo);
+  console.log(Detail.name);
+  const hanbleAddTocart = (d) => {
+    // dispatch is used to update the state
+    dispatch(addToCart(d));
+  };
   return (
     <>
+      {/* {Detail?.map((e) => console.log(e))} */}
       <Container>
         <Light>
           <div>
-            <img src={gff} alt="photos" />
+            <img
+              src={`http://localhost:5000/${Detail.productImage}`}
+              alt="photos"
+            />
             <span>
               <span>name:</span>
-              <span>spinach</span>
+              <span>{Detail.name}</span>
             </span>
           </div>
         </Light>
@@ -74,31 +88,14 @@ export default function Detail() {
           {/* <h1>good</h1>
             paragraph */}
           <div>
-            <p className="font-light">
-              coast farmcare agrovet, n.d.)Coast farmcare agrovet is an
-              organization online web application for selling their products.
-              This system is similar to mkulima young web application on
-              focusing on agricultural product only. This system has payment
-              method that is Mpesa. The system has cart module that enable
-              customer to view accumulated products she/he is intending to place
-              order .For the customer to complete ordering process he/she has to
-              fill in delivery address .The system is also integrated with
-              WhatsApp to enable instant communication between the customer and
-              origination. The coast farmcare agrovet is attractive and well
-              design this is by use of highly quality image and animation in
-              addition to this, this application have product description that
-              equip the customer with information about the product this feature
-              is absent in mkulima young and jiji. One weakness of this system
-              is present of two static page that is gallery page and contact us.
-              2.2 Tool and methodology used in reviewing the systems Use case
-              tool was used in determining weakness exist in jiji, mkulima young
-              and coast farmcare agrovet this mechanisms involves defining the
-              process that customer undertake while ordering products. One
-              weakness of this tool is that it identify process weakness only
-              but technical problem
-            </p>
+            <p className="font-light">{Detail.desc}</p>
             <span>
-              <button className="bg-[#f7fee7]">add to cart</button>
+              <button
+                className="bg-[#f7fee7]"
+                onClick={() => hanbleAddTocart(Detail)}
+              >
+                add to cart
+              </button>
               <Link to="/">
                 <button className="bg-[#f7fee7]">back</button>
               </Link>

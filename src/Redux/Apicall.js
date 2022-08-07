@@ -2,6 +2,7 @@ import axios from "axios";
 import { updateStart, updateError, updateSuccess } from "./UserSlice";
 import { orderStart, orderError, orderSuccess } from "./orderSlice";
 import { deliverStart, deliverError, deliverSuccess } from "./deliverSlice";
+import { productSuccess, prodcutStart, productError } from "./productSlice";
 //  creating a function
 export const updateUser = async (login, dispatch, navigate) => {
   dispatch(updateStart());
@@ -13,6 +14,18 @@ export const updateUser = async (login, dispatch, navigate) => {
     navigate("/home");
   } catch (error) {
     dispatch(updateError());
+  }
+};
+
+export const getProduct = async (id, dispatch) => {
+  dispatch(prodcutStart());
+  try {
+    await axios.get(`http://localhost:5000/product/${id}`).then((response) => {
+      console.log(response);
+      dispatch(productSuccess(response.data));
+    });
+  } catch (error) {
+    dispatch(productError());
   }
 };
 
@@ -36,7 +49,7 @@ export const fetchOrder = async (dispatch) => {
   await axios
     .get(`http://localhost:5000/order`)
     .then((response) => {
-      // console.log(response);
+      console.log(response);
 
       const fetchedOrders = response.data?.order;
       const paidOrders = fetchedOrders.filter((item) => item?.paid === "true");

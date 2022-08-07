@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { useEffect } from "react";
 import getTotalsSales from "../../../Redux/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
+import axios from "axios";
 import { fetchOrder } from "../../../Redux/Apicall";
 import { Chart as ChartJS } from "chart.js/auto";
 export default function Analysis() {
@@ -71,19 +72,6 @@ export default function Analysis() {
       .sort((a, b) => a[0].localeCompare(b[0]))
       .map((e) => ({ [e[0]]: e[1] }));
 
-    // total
-    // const Total = Object.entries(
-    //   Data.reduce((b, a) => {
-    //     let m = a.total.split("T")[0].substr(0, 7) + "-01";
-    //     if (b.hasOwnProperty(m)) b[m].push(a);
-    //     else b[m] = [a];
-    //     return b;
-    //   }, {})
-    // )
-    //   .sort((a, b) => a[0].localeCompare(b[0]))
-    //   .map((e) => ({ [e[0]]: e[1] }));
-    // console.log("total is", Total);
-
     let mArr = [];
     let monthlyTotals = [];
     months.forEach((item) => {
@@ -116,11 +104,15 @@ export default function Analysis() {
     ],
   };
   const totalSale = useSelector((state) => state.order?.totalSale);
-  // console.log("totalSale" + totalSale);
   const dispatch = useDispatch();
   useEffect(() => {
     fetchOrder(dispatch);
   }, [dispatch]);
+
+  // handle delete
+  const Handledelete = async (id) => {
+    await axios.delete(`http://localhost:5000/order/delete/${id}`);
+  };
   return (
     <Container className="flex flex-col">
       <Top>
@@ -135,63 +127,48 @@ export default function Analysis() {
       </Top>
       <div className="flex justify-around h-[380px] pt-2">
         {/* sale analysis digram */}
-        <div style={{ width: "350px", height: "100px" }}>
-          <Doughnut data={data} />
+        <div>
+          <Bar data={data} style={{ width: "640px", height: "150px" }} />
         </div>
-        <div className="flex flex-col gap-10 pt-7">
-          <span>january</span>
-          <span>january</span>
-          <span>january</span>
-        </div>
+        {/* <div className="flex flex-col gap-10 pt-7"></div> */}
       </div>
       {/* table of orders */}
       <table className="table-auto w-[95%] mx-auto">
         <thead>
           <tr className="h-[80px] border-b-2 border-gray-300">
-            <th>pending/success</th>
-            <th>email address</th>
-            <th>destination</th>
-            <th>telphone number</th>
-            <th>pick point</th>
-            <th>order id</th>
-            <th>date</th>
+            <th className="font-light uppercase">pending/success</th>
+            <th className="font-light uppercase text-center">remove</th>
+            <th className="font-light uppercase text-center">paymentID</th>
+            <th className="font-light uppercase text-center">email</th>
+            <th className="font-light uppercase text-center">total</th>
+            <th className="font-light uppercase text-center">date</th>
           </tr>
         </thead>
-        <tbody>
-          <tr className="h-20 border-gray-300 border-b-2  ">
-            <td>
-              <button className="bg-red-400 p-3 rounded">pennding</button>
-            </td>
-            <td>simio#3gmail.com</td>
-            <td>nairobi</td>
-            <td>070003002</td>
-            <td>kahoya</td>
-            <td>ewlepwewp</td>
-            <td>2/4/2017</td>
-          </tr>
-          <tr className="h-20 border-gray-300 border-b-2  ">
-            <td>
-              <button className="bg-green-400 p-3 rounded w-[100px]">
-                success
-              </button>
-            </td>
-            <td>evans mwangi</td>
-            <td>0994955</td>
-            <td>eldoret</td>
-            <td>kapsoya</td>
-            <td>djfjjf</td>
-            <td>3/4/2001</td>
-          </tr>
-          <tr className="h-20 border-gray-300 border-b-2  ">
-            <td>marry</td>
-            <td>093993993</td>
-            <td>kitale</td>
-            <td>town</td>
-            <td>hjgjfggk</td>
-            <td>5/66/2020</td>
-            <td>5/66/2020</td>
-          </tr>
-        </tbody>
+        {Data.map((order) => (
+          <tbody>
+            <tr className="h-20 border-gray-300 border-b-2" key={order._id}>
+              <td>
+                <button className="bg-green-200 p-3 rounded text-blue-400">
+                  {order.paid === "true" ? "paid" : "pending"}
+                </button>
+              </td>
+              <td>
+                <button
+                  className="bg-indigo-200 p-3 rounded text-red-400"
+                  onClick={() => Handledelete(order._id)}
+                >
+                  remove
+                </button>
+              </td>
+              <td className="text-center">{order.paymentID}</td>
+              <td className="text-center">{order.email}</td>
+              <td className="text-center">{order.total}</td>
+              <td className="text-center">
+                {new Date(order.updatedAt).toLocaleDateString()}
+              </td>
+            </tr>
+          </tbody>
+        ))}
       </table>
     </Container>
   );
