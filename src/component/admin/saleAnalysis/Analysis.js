@@ -144,7 +144,7 @@ export default function Analysis() {
             <th className="font-light uppercase text-center">date</th>
           </tr>
         </thead>
-        {Data.map((order) => (
+        {Data?.map((order) => (
           <tbody>
             <tr className="h-20 border-gray-300 border-b-2" key={order._id}>
               <td>

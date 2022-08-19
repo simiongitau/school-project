@@ -16,11 +16,11 @@ export default function Product() {
   const Light = styled.div`
     flex: 2;
     background-color: rgba(128, 128, 128, 0.644);
-    height: 90vh;
+    /* height: 90vh; */
   `;
   const Right = styled.div`
     flex: 10;
-    height: 90vh;
+    /* height: 90vh; */
   `;
   const fetchData = async () => {
     await axios
@@ -48,7 +48,7 @@ export default function Product() {
   };
   return (
     <>
-      <Main>
+      <Main className="">
         <Light className="flex flex-col p-4 gap-3">
           {/* <Side /> */}
           <h2 className="mx-auto font-bold uppercase">categorly</h2>
@@ -65,7 +65,10 @@ export default function Product() {
           >
             pestcide
           </button>
-          <button className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase">
+          <button
+            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            onClick={() => handleCategorly("fertilizer")}
+          >
             fertilizer
           </button>
           <button

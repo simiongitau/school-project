@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,7 +77,7 @@ export default function Cart() {
     console.log("transaction Cancel");
   };
   return (
-    <div className="h-screen bg-gray-200 pl-4">
+    <div className=" bg-gray-200 pl-4 h-screen ">
       <i
         className="bi bi-x-circle text-4xl text-red-700"
         onClick={() => handleClearCart()}
@@ -99,59 +98,61 @@ export default function Cart() {
         ) : (
           carts.cartItems.map((cartItem) => {
             return (
-              <div
-                className="col-lg-6 flex mt-[20px] w-[60%] gap-12 h-[20%] rounded justify-between items-center border-b-4 border-gray-400"
-                key={cartItem.id}
-              >
-                {/* div of image and it details */}
-                <div className="flex">
-                  {/* image */}
-                  <img
-                    src={`http://localhost:5000/${cartItem.productImage}`}
-                    alt="photos"
-                    width="100px"
-                    height="100px"
-                    className="rounded"
-                  />
-                  <div className="ml-1">
-                    {/* product name */}
-                    <span>
-                      <i>{cartItem.name}</i>
-                    </span>
-                    {/* price */}
-                    <h4 className="font-bold uppercase">
-                      {cartItem.price}
-                      kesh
-                    </h4>
-                  </div>
-                </div>
-                {/* div of quantity */}
-                <div className="flex items-center gap-2">
-                  <h5>{cartItem.cartQuantity}</h5>
-                  <div className="flex flex-col">
-                    <button
-                      className="bg-blue-200 rounded p-3 mb-3 shadow-xl"
-                      onClick={() => handleIncreaseCart(cartItem)}
-                    >
-                      +
-                    </button>
-                    <button
-                      className="bg-blue-200 rounded p-3 "
-                      onClick={() => handleDecreaseCart(cartItem)}
-                    >
-                      -
-                    </button>
-                  </div>
-                </div>
-                {/* amount */}
-                <span className="font-bolder uppercase">{cartItem.total}</span>
-                {/* delete */}
-                <button
-                  className="mr-[8px] bg-red-300 p-3 rounded shadow-xl shadow-blue-200"
-                  onClick={() => handleRemove(cartItem)}
+              <div className="grid grid-cols-1">
+                <div
+                  className="flex mt-[20px]  rounded items-center border-b-4  w-[55%] justify-between p-2 border-gray-400"
+                  key={cartItem.id}
                 >
-                  remove
-                </button>
+                  {/* div of image and it details */}
+                  <div className="flex">
+                    {/* image */}
+                    <img
+                      src={`http://localhost:5000/${cartItem.productImage}`}
+                      alt="photos"
+                      width="100px"
+                      height="100px"
+                      className="rounded"
+                    />
+                    <div className=" space-y-4 p-2 w-[55%]">
+                      {/* product name */}
+                      <span>
+                        <i>{cartItem.name}</i>
+                      </span>
+                      {/* price */}
+                      <h4 className="font-bold uppercase">
+                        {cartItem.price}
+                        kesh
+                      </h4>
+                    </div>
+                  </div>
+                  {/* div of quantity */}
+                  <div className="flex items-center gap-2 p-2">
+                    <h5>{cartItem.cartQuantity}</h5>
+                    <div className="flex flex-col">
+                      <button
+                        className="bg-blue-200 rounded p-3 mb-3 shadow-xl"
+                        onClick={() => handleIncreaseCart(cartItem)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="bg-blue-200 rounded p-3 "
+                        onClick={() => handleDecreaseCart(cartItem)}
+                      >
+                        -
+                      </button>
+                    </div>
+                  </div>
+                  {/* amount */}
+                  {/* <span className="font-bolder uppercase">{cartItem.total}</span> */}
+                  {/* delete */}
+                  <button
+                    className=" bg-red-300 p-3 rounded shadow-xl shadow-blue-200"
+                    onClick={() => handleRemove(cartItem)}
+                  >
+                    remove
+                  </button>
+                </div>
               </div>
             );
           })
@@ -159,16 +160,22 @@ export default function Cart() {
 
         {/* summarly section */}
         <form className="mt-[2px]  shadow-xl rounded-2 mr-3  p-3 z-10 absolute top-0 bg-gray-300 w-[25%] right-0">
-          <div className="mt-[30px] text-center uppercase">order summarly</div>
+          <div className="mt-[30px] text-center uppercase text-sm underline font-bold">
+            order summarly
+          </div>
           <div className="p-1 bg-gray-300 w-[155px] ml-[31%]"></div>
           <div className=" mt-[5px] flex justify-between mb-4">
-            <span className="text-xl font-light uppercase">total item</span>
-            <span className="mr-[10px]">{cartsQuantity}</span>
+            <span className="text-sm font-light uppercase">total item</span>
+            <span className="mr-[10px] font-bold text-green-700 text-xl">
+              {cartsQuantity}
+            </span>
           </div>
-          <span className=" ml-[40%] text-lg ">shipping detail</span>
+          <span className=" ml-[40%] text-sm uppercase underline my-1 font-bold">
+            shipping detail
+          </span>
           <div className=" flex flex-col gap-2">
             <div className="flex items-center">
-              <label className="uppercase">name:</label>
+              <label className="uppercase text-sm">name:</label>
               <input
                 className=" border-b-4 border-gray-400 bg-gray-100 p-3 w-[100%] ml-10 outline-none"
                 placeholder="mary muthoni"
@@ -177,7 +184,7 @@ export default function Cart() {
               />
             </div>
             <div className="flex items-center">
-              <span className="uppercase">telphone no :</span>
+              <span className="uppercase text-sm">telphone no :</span>
               <input
                 type="Number"
                 placeholder="07*********"
@@ -234,14 +241,14 @@ export default function Cart() {
             {/* location */}
           </div>
           <div className="mb-[40px] mt-[50px] flex justify-center">
-            <h5 className="text-black shadow-sm">
-              tax 16% and transport fee within eldoret
+            <h5 className=" shadow-sm text-sm text-green-600 capitalize">
+              tax 16% and transport fee within eldoret.
             </h5>
           </div>
 
           <div className="flex items-center justify-between">
-            <span>total cost</span>
-            <h4 className="font-bold uppercase">
+            <span className="uppercase font-bold text-sm">total cost</span>
+            <h4 className="font-bold uppercase text-green-500 underline">
               {carts.cartTotalAmount} kesh
             </h4>
           </div>

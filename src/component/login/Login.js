@@ -4,6 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../Redux/Apicall";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassord] = useState("");
@@ -47,7 +48,7 @@ export default function Login() {
           <div className="flex justify-around items-center mt-4">
             <span className="uppercase font-light">email:</span>
             <input
-              type="text"
+              type="email"
               required
               className="p-3 ml-7 border-b-2 outline-none border-gray-600 bg-gray-100"
               onChange={(e) => setEmail(e.target.value)}
@@ -64,7 +65,9 @@ export default function Login() {
           </div>
           <div className="flex justify-center items-center">
             {Error === true ? (
-              <h1 className="text-red-500 text-sm my-2">incorrect credial</h1>
+              <h1 className="text-red-500 text-sm my-2">
+                incorrect credial or no account register first
+              </h1>
             ) : (
               ""
             )}
@@ -87,7 +90,7 @@ export default function Login() {
           <div className="flex justify-around mt-3 items-center">
             <span className="uppercase font-light ">email:</span>
             <input
-              type="text"
+              type="email"
               required
               className="p-3 ml-[106px] outline-none border-b-2 border-gray-500 bg-gray-100"
               onChange={(e) => setEmail(e.target.value)}
@@ -118,9 +121,9 @@ export default function Login() {
                 format
               </span>
             ) : condition === true ? (
-              <span className="text-blue-500 text-sm">
-                successful registered
-              </span>
+              toast.success(`successful registered`, {
+                position: "top-center",
+              })
             ) : (
               ""
             )}

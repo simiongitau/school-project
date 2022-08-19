@@ -1,5 +1,4 @@
 import React from "react";
-import imj from "../../../assert/dap.jpg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -25,9 +24,11 @@ export default function Products() {
   };
   return (
     <div className="relative">
-      <button className="top-0 absolute right-1 p-3 rounded bg-gray-200">
-        add
-      </button>
+      <Link to="/update" className="absolute top-3 right-2">
+        <button className="bg-green-100  w-[100px] p-2 rounded flex items-center justify-center uppercase">
+          add
+        </button>
+      </Link>
       <table className="table-auto w-[95%] mx-auto">
         <thead>
           <tr className="h-[80px] border-b-2 border-gray-300">
@@ -36,7 +37,6 @@ export default function Products() {
             <th className="uppercase font-light">price</th>
             <th className="text-center uppercase font-light">description</th>
             <th className="uppercase font-light">instore</th>
-            <th className="uppercase font-light">update</th>
             <th className="uppercase font-light">delete</th>
           </tr>
         </thead>
@@ -54,19 +54,15 @@ export default function Products() {
                 />
               </td>
               <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td className="text-center">{product.desc}</td>
-              <td>{product.instore}</td>
-              <td>
-                <Link to="/update">
-                  <button className="bg-green-100  w-[100px] p-2 rounded flex items-center justify-center">
-                    <i className="bi bi-pen-fill"></i>
-                  </button>
-                </Link>
+              <td className="">{product.price}KESH</td>
+              <td className="text-justify p-2 w-[50%] font-extralight text-sm">
+                {product.desc}
               </td>
+              <td className="text-center capitalize">{product.instore}</td>
+
               <td>
                 <button
-                  className="bg-red-200 p-2 rounded w-[100px]"
+                  className="bg-red-200 p-2 rounded w-[100px] m-2"
                   onClick={() => handleDelete(product._id)}
                 >
                   delete

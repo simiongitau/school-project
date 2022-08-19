@@ -18,15 +18,12 @@ export default function Footer() {
       text-transform: capitalize;
     }
   `;
-  const End = styled.span`
-    text-transform: capitalize;
-    margin-left: 500px;
-  `;
+
   return (
     <Main>
       <Container>
         {/* div of social media */}
-        <div>
+        <div className="text-sm font-bold text-green-100">
           <span className="cursor-pointer">
             <span>facebook</span>{" "}
             <span style={{ paddingLeft: "20px" }}>
@@ -53,7 +50,7 @@ export default function Footer() {
           </span>
         </div>
         {/* div of of contact */}
-        <div>
+        <div className="text-green-100 font-bold text-sm">
           <span>
             <i
               className="bi bi-telephone-fill"
@@ -66,7 +63,7 @@ export default function Footer() {
           </span>
           <span>
             <i className="bi bi-envelope" style={{ paddingRight: "3px" }}></i>
-            <span>email:</span>{" "}
+            <span>email:</span>
             <span>
               {" "}
               <i>eldoifo@gmail.com </i>
@@ -82,9 +79,12 @@ export default function Footer() {
           {/* <span><i classNameName="bi bi-facebook" style={{paddingRight:'3px'}}></i><span>yy</span> <span style={{paddingLeft:'3px'}}><i className="bi bi-facebook"></i></span></span>  */}
         </div>
       </Container>
-      <End style={{ marginTop: "50px" }}>
+      <div
+        style={{ marginTop: "50px" }}
+        className="text-green-100 font-bold text-sm flex justify-center items-center"
+      >
         copyright 2022. eldo agrove limmited. all right reserved.
-      </End>
+      </div>
     </Main>
   );
 }

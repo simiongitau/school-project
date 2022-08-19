@@ -3,6 +3,7 @@ import { updateStart, updateError, updateSuccess } from "./UserSlice";
 import { orderStart, orderError, orderSuccess } from "./orderSlice";
 import { deliverStart, deliverError, deliverSuccess } from "./deliverSlice";
 import { productSuccess, prodcutStart, productError } from "./productSlice";
+import { toast } from "react-toastify";
 //  creating a function
 export const updateUser = async (login, dispatch, navigate) => {
   dispatch(updateStart());
@@ -10,8 +11,18 @@ export const updateUser = async (login, dispatch, navigate) => {
   try {
     const res = await axios.post("http://localhost:5000/user/login", login);
     dispatch(updateSuccess(res.data));
-    console.log(res.data);
-    navigate("/home");
+    console.log(res.data.user.role);
+    if (res.data.user.role === "admin") {
+      toast.success(`succesfull login`, {
+        position: "top-center",
+      });
+      navigate("/admin");
+    } else {
+      toast.success(`succesfull login`, {
+        position: "top-center",
+      });
+      navigate("/cart");
+    }
   } catch (error) {
     dispatch(updateError());
   }

@@ -35,7 +35,6 @@ export default function Products({ product }) {
     width: 100%;
     align-items: center;
     margin-top: 5px;
-    text-transform: uppercase;
   `;
   const Nav = styled.div`
     width: 100%;
@@ -56,7 +55,7 @@ export default function Products({ product }) {
   `;
   // console.log(product);
   const dispatch = useDispatch();
-  const { name, price, productImage, _id } = product;
+  const { name, price, productImage, instore, _id } = product;
   // method to add items to cart
   const hanbleAddTocart = (product) => {
     // dispatch is used to update the state
@@ -73,8 +72,18 @@ export default function Products({ product }) {
         <img src={`http://localhost:5000/${productImage}`} alt="photos" />
         {/* div containing price and the name of product */}
         <Info>
-          <span className="text-lg">{name}</span>{" "}
-          <span className="text-lg text-indigo-500 font-bold">{price}KESH</span>
+          <span className="text-sm font-bold uppercase">{name}</span>
+          {instore === "true" ? (
+            <span className="text-[0.6em] text-pink-400 font-bold p-2">
+              instore
+            </span>
+          ) : (
+            <span>outstore</span>
+          )}
+          <span className="text-sm text-indigo-500 font-bold ">
+            {price}
+            <span className="pl-1">KESH</span>
+          </span>
         </Info>
         <Nav>
           <Link to="/detail">

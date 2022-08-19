@@ -85,7 +85,7 @@ export default function Nav() {
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <li>home</li>
         </Link>
-        <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
           <li>cart</li>
         </Link>
         <Link to="/about" style={{ textDecoration: "none", color: "black" }}>

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
-import gff from "../../assert/dap.jpg";
 import { useSelector } from "react-redux";
 import { addDetail, addToCart } from "../../Redux/cartSlice";
 import { useDispatch } from "react-redux";
@@ -19,47 +18,15 @@ export default function Detail() {
       margin-right: 10px;
       p {
         text-align: justify;
-        letter-space: 2px;
+        letter-space: 3px;
         margin-top: 10px;
         padding-bottom: 28px;
-      }
-      span {
-        display: flex;
-        justify-content: space-between;
-        width: 400px;
-        margin-left: 290px;
-        button {
-          width: 150px;
-          padding: 8px;
-          border-radius: 10px;
-          outline: none;
-          text-transform: uppercase;
-        }
       }
     }
   `;
   const Light = styled.div`
     flex: 6;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    div {
-      display: flex;
-      flex-direction: column;
-      span {
-        font-size: 20px;
-        display: flex;
-        justify-content: space-between;
-        text-transform: capitalize;
-        margin-top: 10px;
-        width: 250px;
-        margin-left: 30px;
-      }
-      img {
-        width: 350px;
-        height: 350px;
-      }
-    }
   `;
   const dispatch = useDispatch();
   const Detail = useSelector((state) => state.product.productInfo);
@@ -72,15 +39,16 @@ export default function Detail() {
     <>
       {/* {Detail?.map((e) => console.log(e))} */}
       <Container>
-        <Light>
-          <div>
-            <img
-              src={`http://localhost:5000/${Detail.productImage}`}
-              alt="photos"
-            />
-            <span>
-              <span>name:</span>
-              <span>{Detail.name}</span>
+        <Light className="flex flex-col">
+          <img
+            src={`http://localhost:5000/${Detail.productImage}`}
+            alt="photos"
+            className="w-[350px] h-[350px] mx-auto"
+          />
+          <div className="w-full p-4 flex justify-center items-center space-x-2 font-light">
+            <span className="uppercase">name:</span>
+            <span className="underline font-bold uppercase">
+              {Detail.name}.
             </span>
           </div>
         </Light>
@@ -88,18 +56,20 @@ export default function Detail() {
           {/* <h1>good</h1>
             paragraph */}
           <div>
-            <p className="font-light">{Detail.desc}</p>
-            <span>
+            <p className="font-ligh py-4 pr-6 font-extralight">{Detail.desc}</p>
+            <div className=" flex justify-center items-center flex-row space-x-10 my-10">
               <button
-                className="bg-[#f7fee7]"
+                className="bg-green-400 p-[0.5em] rounded cursor-pointer text-sm uppercase"
                 onClick={() => hanbleAddTocart(Detail)}
               >
                 add to cart
               </button>
               <Link to="/">
-                <button className="bg-[#f7fee7]">back</button>
+                <button className="bg-green-400  p-[0.5em] w-[6.3em] rounded cursor-pointer uppercase text-sm">
+                  back
+                </button>
               </Link>
-            </span>
+            </div>
           </div>
           {/* back button */}
           {/* add to cart button */}

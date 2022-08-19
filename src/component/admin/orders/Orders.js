@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { fetchDeliver } from "../../../Redux/Apicall";
 import { useDispatch, useSelector } from "react-redux";
