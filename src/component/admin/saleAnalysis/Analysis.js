@@ -116,13 +116,13 @@ export default function Analysis() {
   return (
     <Container className="flex flex-col">
       <Top>
-        <div>
+        {/* <div>
           <span>revenue generated</span>
           <h3>56,000ksh</h3>
-        </div>
+        </div> */}
         <div>
           <span>total sales</span>
-          <h3 className="font-bold uppercase">{totalSale} kesh</h3>
+          <h3 className="font-bold uppercase font-mono">{totalSale} kesh</h3>
         </div>
       </Top>
       <div className="flex justify-around h-[380px] pt-2">
@@ -133,10 +133,10 @@ export default function Analysis() {
         {/* <div className="flex flex-col gap-10 pt-7"></div> */}
       </div>
       {/* table of orders */}
-      <table className="table-auto w-[95%] mx-auto">
+      <table className="table-auto w-[95%] mx-auto bg-[#d4d1ba] mb-6">
         <thead>
-          <tr className="h-[80px] border-b-2 border-gray-300">
-            <th className="font-light uppercase">pending/success</th>
+          <tr className="h-[80px] border-b-2 border-indigo-300">
+            <th className="font-light uppercase pl-2">pending/success</th>
             <th className="font-light uppercase text-center">remove</th>
             <th className="font-light uppercase text-center">paymentID</th>
             <th className="font-light uppercase text-center">email</th>
@@ -145,25 +145,28 @@ export default function Analysis() {
           </tr>
         </thead>
         {Data?.map((order) => (
-          <tbody>
-            <tr className="h-20 border-gray-300 border-b-2" key={order._id}>
-              <td>
-                <button className="bg-green-200 p-3 rounded text-blue-400">
+          <tbody className="p-2 ">
+            <tr
+              className="h-18  border-indigo-300 border-b-2  "
+              key={order._id}
+            >
+              <td className="pl-2">
+                <button className="bg-green-300 rounded text-blue-400 h-8 w-[60px] ">
                   {order.paid === "true" ? "paid" : "pending"}
                 </button>
               </td>
               <td>
                 <button
-                  className="bg-indigo-200 p-3 rounded text-red-400"
+                  className="bg-indigo-300  rounded text-red-400 h-8 w-[100px] my-2"
                   onClick={() => Handledelete(order._id)}
                 >
                   remove
                 </button>
               </td>
-              <td className="text-center">{order.paymentID}</td>
-              <td className="text-center">{order.email}</td>
-              <td className="text-center">{order.total}</td>
-              <td className="text-center">
+              <td className="text-center font-light">{order.paymentID}</td>
+              <td className="text-centern font-light">{order.email}</td>
+              <td className="text-center font-light">{order.total}</td>
+              <td className="text-center font-light">
                 {new Date(order.updatedAt).toLocaleDateString()}
               </td>
             </tr>

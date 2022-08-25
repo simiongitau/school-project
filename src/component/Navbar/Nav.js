@@ -70,7 +70,7 @@ export default function Nav() {
     <Main className="relative bg-gray-100">
       {/* image div */}
       <span className="font-bold text-4xl font-mono">Eldo agrovet</span>
-      <span className="bg-red-600 rounded-full absolute top-0 text-white p-1 left-[51%] font-bold">
+      <span className="bg-red-600 rounded-full absolute top-0 text-white p-2 left-[55%] font-bold">
         {cartsQuantity}
       </span>
       {/* list of home,cart about */}

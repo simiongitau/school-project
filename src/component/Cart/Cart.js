@@ -77,7 +77,7 @@ export default function Cart() {
     console.log("transaction Cancel");
   };
   return (
-    <div className=" bg-gray-200 pl-4 h-screen ">
+    <div className=" bg-[#d4d1ba] pl-4 h-screen ">
       <i
         className="bi bi-x-circle text-4xl text-red-700"
         onClick={() => handleClearCart()}
@@ -119,7 +119,7 @@ export default function Cart() {
                         <i>{cartItem.name}</i>
                       </span>
                       {/* price */}
-                      <h4 className="font-bold uppercase">
+                      <h4 className="font-bold uppercase font-mono">
                         {cartItem.price}
                         kesh
                       </h4>
@@ -248,7 +248,7 @@ export default function Cart() {
 
           <div className="flex items-center justify-between">
             <span className="uppercase font-bold text-sm">total cost</span>
-            <h4 className="font-bold uppercase text-green-500 underline">
+            <h4 className="font-bold uppercase text-green-500 underline font-mono">
               {carts.cartTotalAmount} kesh
             </h4>
           </div>

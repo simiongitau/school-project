@@ -41,7 +41,7 @@ export default function Login() {
       {/* login div */}
       <div className="p-10 flex justify-center">
         <form
-          className=" w-[80%]  rounded shadow-md p-3 bg-gray-200"
+          className=" w-[80%]  rounded shadow-md p-3 bg-[#d4d1ba]"
           onSubmit={SubmitData}
         >
           <span className="font-bold uppercase mx-[50%] ">login</span>
@@ -83,7 +83,7 @@ export default function Login() {
       {/* register div */}
       <div className=" p-10 justify-center">
         <form
-          className="w-[80%] shadow-md bg-gray-200 rounded p-4"
+          className="w-[80%] shadow-md bg-[#d4d1ba] rounded p-4"
           onSubmit={SubmitRegister}
         >
           <span className="font-bold uppercase mx-[40%] ">register</span>

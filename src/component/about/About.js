@@ -12,10 +12,10 @@ export default function About() {
           className="w-full h-[35vh] object-cover opacity-80 rounded"
         />
         <div className="flex items-center pt-2">
-          <h2 className="font-bold capitalize text-[45px] mr-4 text-gray-500">
+          <h2 className="font-bold capitalize text-[45px] mr-4 text-gray-500 font-serif">
             eldo agrovet <br /> limited
           </h2>
-          <p className=" text-justify font-extralight max-w-[75%]">
+          <p className=" text-justify font-extralight max-w-[75%] font-sans">
             Biovision Foundation is a Swiss non-profit organization with a
             global mission to alleviate poverty and improve the livelihoods of
             rural people in Africa while maintaining the natural resources and
@@ -40,13 +40,15 @@ export default function About() {
       {/* image */}
       {/* compny info */}
       {/* end of first div */}
-      <div className="font-bold capitalize text-center my-2 text-xl">
+      <div className="font-bold capitalize text-center my-2 text-xl font-serif">
         education
       </div>
       <div className="pt-2 grid grid-cols-4 gap-4 pb-2">
         <div className=" p-4 rounded flex justify-center flex-col items-center shadow-md shadow-gray-400 ">
-          <h3 className="capitalize font-bold my-2">feed nutrition</h3>
-          <p className="font-extralight text-justify">
+          <h3 className="capitalize font-bold my-2 font-serif">
+            feed nutrition
+          </h3>
+          <p className="font-extralight text-justify font-sans">
             Animal feed needs to meet the requirements of the animal. For cattle
             it must contain a certain structure to keep the stomach healthy, and
             for all animals it must contain dry matter, various groups of
@@ -75,7 +77,7 @@ export default function About() {
         </div>
         <div className=" p-4 rounded flex justify-center flex-col items-center shadow-md shadow-gray-400 ">
           <h3 className="capitalize font-bold my-2">feed nutrition</h3>
-          <p className="font-extralight text-justify">
+          <p className="font-extralight text-justify font-sans">
             Animal feed needs to meet the requirements of the animal. For cattle
             it must contain a certain structure to keep the stomach healthy, and
             for all animals it must contain dry matter, various groups of
@@ -104,7 +106,7 @@ export default function About() {
         </div>
         <div className=" p-4 rounded flex justify-center flex-col items-center shadow-md shadow-gray-400 ">
           <h3 className="capitalize font-bold my-2">feed nutrition</h3>
-          <p className="font-extralight text-justify">
+          <p className="font-extralight text-justify font-sans">
             Animal feed needs to meet the requirements of the animal. For cattle
             it must contain a certain structure to keep the stomach healthy, and
             for all animals it must contain dry matter, various groups of
@@ -133,7 +135,7 @@ export default function About() {
         </div>
         <div className=" p-4 rounded flex justify-center flex-col items-center shadow-md shadow-gray-400 ">
           <h3 className="capitalize font-bold my-2">feed nutrition</h3>
-          <p className="font-extralight text-justify">
+          <p className="font-extralight text-justify font-sans">
             Animal feed needs to meet the requirements of the animal. For cattle
             it must contain a certain structure to keep the stomach healthy, and
             for all animals it must contain dry matter, various groups of

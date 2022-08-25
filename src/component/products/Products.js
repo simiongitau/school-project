@@ -62,29 +62,39 @@ export default function Products({ product }) {
   };
   return (
     <div className="col-lg-3 col-sm-6 pt-4">
-      <Wrapper className="bg-gray-400">
+      <Wrapper className="bg-[#d4d1ba]">
         {/* we have image */}
         <img src={`http://localhost:5000/${productImage}`} alt="photos" />
         {/* div containing price and the name of product */}
         <Info>
-          <span className="text-sm font-bold uppercase">{name}</span>
+          <span className="text-sm font-bold uppercase font-serif">{name}</span>
           {instore === "true" ? (
-            <span className="text-[0.6em] text-indigo-500 font-bold p-2">
+            <span className="text-[0.6em] text-indigo-500 font-bold p-2 font-serif">
               instore
             </span>
           ) : (
             <span>outstore</span>
           )}
-          <span className="text-sm text-indigo-500 font-bold ">
+          <span className="text-sm text-indigo-500 font-bold font-mono ">
             {price}
             <span className="pl-1">KESH</span>
           </span>
         </Info>
         <Nav>
           <Link to="/detail">
-            <button onClick={() => handleDetail(_id)}>maelezo</button>
+            <button
+              onClick={() => handleDetail(_id)}
+              className="font-sarif text-sm"
+            >
+              maelezo
+            </button>
           </Link>
-          <button onClick={() => hanbleAddTocart(product)}>add to cart</button>
+          <button
+            onClick={() => hanbleAddTocart(product)}
+            className="font-serif text-sm"
+          >
+            add to cart
+          </button>
         </Nav>
       </Wrapper>
     </div>

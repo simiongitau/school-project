@@ -25,13 +25,13 @@ export default function Products() {
   return (
     <div className="relative">
       <Link to="/update" className="absolute top-3 right-2">
-        <button className="bg-green-100  w-[100px] p-2 rounded flex items-center justify-center uppercase">
+        <button className="bg-gray-100  w-[100px] p-2 rounded flex items-center justify-center uppercase">
           add
         </button>
       </Link>
-      <table className="table-auto w-[95%] mx-auto">
+      <table className="table-auto w-[95%] mx-auto bg-[#d4d1ba] mb-2">
         <thead>
-          <tr className="h-[80px] border-b-2 border-gray-300">
+          <tr className="h-[80px] border-b-2 border-indigo-300">
             <th className="uppercase text-center font-light">image</th>
             <th className="uppercase font-light">name</th>
             <th className="uppercase font-light">price</th>
@@ -43,7 +43,7 @@ export default function Products() {
         {data.product?.map((product) => (
           <tbody className="">
             <tr
-              className="h-20 border-gray-300 border-b-2 bg-gray-100"
+              className="h-20 border-indigo-300 border-b-2 "
               key={product._id}
             >
               <td className="p-2">
@@ -53,12 +53,14 @@ export default function Products() {
                   className="w-[90px] h-[50px]"
                 />
               </td>
-              <td>{product.name}</td>
-              <td className="">{product.price}KESH</td>
-              <td className="text-justify p-2 w-[50%] font-extralight text-sm">
+              <td className="font-serif">{product.name}</td>
+              <td className="font-mono">{product.price}KESH</td>
+              <td className="text-justify p-2 w-[50%] font-extralight text-sm font-sans">
                 {product.desc}
               </td>
-              <td className="text-center capitalize">{product.instore}</td>
+              <td className="text-center capitalize font-serif">
+                {product.instore}
+              </td>
 
               <td>
                 <button

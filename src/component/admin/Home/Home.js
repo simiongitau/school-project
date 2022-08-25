@@ -18,13 +18,11 @@ export default function Home() {
     padding: 10px;
     display: flex;
     div {
-      margin-left: 40px;
+      margin-left: 20px;
       button {
         padding: 5px;
-        width: 150px;
+        width: 250px;
         height: 55px;
-        border: none;
-        margin-bottom: 15px;
         cursor: pointer;
         text-transform: uppercase;
       }
@@ -35,20 +33,28 @@ export default function Home() {
       <Wrapper className="">
         <Left className="">
           <div>
-            <button className="bg-gray-200 shadow-sm">sale analysis</button>
+            <button className="bg-gray-200 shadow-sm border-b-2 border-gray-500 font-light">
+              sale analysis
+            </button>
             <Link to="/product">
               {" "}
-              <button className="bg-gray-200 shadow-sm">products</button>
+              <button className="bg-gray-200 shadow-sm border-b-2 border-gray-500 font-light">
+                products
+              </button>
             </Link>
             <Link to="/customer">
               {" "}
-              <button className="bg-gray-200 shadow-sm">customers</button>
+              <button className="bg-gray-200 shadow-sm border-b-2  border-gray-500 font-light">
+                customers
+              </button>
             </Link>
             <Link to="/order">
               {" "}
-              <button className="bg-gray-200 shadow-sm">orders</button>
+              <button className="bg-gray-200 shadow-sm  border-b-2 border-gray-500 font-light">
+                orders
+              </button>
             </Link>
-            <button className="bg-gray-200 shadow-sm">charts</button>
+            <button className="bg-gray-200 shadow-sm  border-gray-500 font-light"></button>
           </div>
         </Left>
         <Right>

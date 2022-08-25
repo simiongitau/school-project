@@ -20,7 +20,7 @@ export default function Login() {
       className=" h-[87.5vh] flex justify-center items-center"
       onSubmit={handleSubmit}
     >
-      <form className="shadow-xl p-3 bg-gray-200 w-[50%] h-[55%] flex flex-col justify-center items-center rounded">
+      <form className="shadow-xl p-3 bg-[#d4d1ba] w-[50%] h-[55%] flex flex-col justify-center items-center rounded">
         <span className="font-bold text-xl capitalize ">login</span>
         <div className="flex items-center my-10">
           <span className="uppercase">email:</span>
@@ -47,7 +47,7 @@ export default function Login() {
         ) : (
           ""
         )}
-        <button className="bg-gray-300 p-3 w-[150px] rounded my-auto">
+        <button className="bg-gray-400 p-3 w-[150px] rounded my-auto">
           send
         </button>
       </form>
