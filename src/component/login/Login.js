@@ -41,7 +41,7 @@ export default function Login() {
       {/* login div */}
       <div className="p-10 flex justify-center">
         <form
-          className=" w-[80%]  rounded shadow-xl p-3 bg-gray-200"
+          className=" w-[80%]  rounded shadow-md p-3 bg-gray-200"
           onSubmit={SubmitData}
         >
           <span className="font-bold uppercase mx-[50%] ">login</span>
@@ -50,16 +50,16 @@ export default function Login() {
             <input
               type="email"
               required
-              className="p-3 ml-7 border-b-2 outline-none border-gray-600 bg-gray-100"
+              className="p-3 ml-7 border-b-2 outline-none border-gray-600 bg-gray-100 h-12"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="flex justify-around items-center">
-            <span className="uppercase font-light">password:</span>
+            <span className="uppercase font-light mt-4">password:</span>
             <input
               type="password"
               required
-              className="p-3 mt-4  border-b-2 outline-none border-gray-600 bg-gray-100"
+              className="p-3 mt-4  border-b-2 outline-none border-gray-600 bg-gray-100 h-12"
               onChange={(e) => setPassord(e.target.value)}
             />
           </div>
@@ -73,7 +73,7 @@ export default function Login() {
             )}
           </div>
           <button
-            className="bg-gray-600 p-3 w-[150px] rounded   text-white my-[50px] mx-[250px]"
+            className="bg-gray-400 p-3 w-[279px] rounded   text-white my-[50px] h-12 ml-[220px] uppercase"
             type="submit"
           >
             send
@@ -83,7 +83,7 @@ export default function Login() {
       {/* register div */}
       <div className=" p-10 justify-center">
         <form
-          className="w-[80%] shadow-xl bg-gray-200 rounded p-4"
+          className="w-[80%] shadow-md bg-gray-200 rounded p-4"
           onSubmit={SubmitRegister}
         >
           <span className="font-bold uppercase mx-[40%] ">register</span>
@@ -92,7 +92,7 @@ export default function Login() {
             <input
               type="email"
               required
-              className="p-3 ml-[106px] outline-none border-b-2 border-gray-500 bg-gray-100"
+              className="p-3 ml-[106px] outline-none border-b-2 border-gray-500 bg-gray-100 h-12"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -101,7 +101,7 @@ export default function Login() {
             <input
               type="password"
               required
-              className="p-3 ml-20 border-b-2 border-gray-500 outline-none bg-gray-100"
+              className="p-3 ml-20 border-b-2 border-gray-500 outline-none bg-gray-100 h-12"
               onChange={(e) => setPassord(e.target.value)}
             />
           </div>
@@ -110,7 +110,7 @@ export default function Login() {
             <input
               type="password"
               required
-              className="p-3 ml-4 border-b-2 border-gray-500 outline-none bg-gray-100"
+              className="p-3 ml-4 border-b-2 border-gray-500 outline-none bg-gray-100 h-12"
               onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
@@ -128,7 +128,7 @@ export default function Login() {
               ""
             )}
           </div>
-          <button className="p-3 bg-gray-500 w-[150px] rounded mx-[40%] my-4 text-white">
+          <button className="p-3 bg-gray-400 w-[280px] rounded ml-[44%] my-4 text-white h-12 uppercase">
             send
           </button>
         </form>

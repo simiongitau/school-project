@@ -6,7 +6,6 @@ import { addDetail, addToCart } from "../../Redux/cartSlice";
 import { getProduct } from "../../Redux/Apicall";
 export default function Products({ product }) {
   const Wrapper = styled.div`
-    background-color: rgba(165, 173, 180, 0.842);
     padding: 10px;
     height: 40vh;
     width: 35vh;
@@ -20,10 +19,6 @@ export default function Products({ product }) {
       height: 170px;
       width: 200px;
       object: cover;
-    }
-    :hover {
-      background-color: gray;
-      box-shadow: 2px;
     }
   `;
   const Info = styled.div`
@@ -66,15 +61,15 @@ export default function Products({ product }) {
     getProduct(id, dispatch);
   };
   return (
-    <div className="col-lg-3 col-sm-6">
-      <Wrapper>
+    <div className="col-lg-3 col-sm-6 pt-4">
+      <Wrapper className="bg-gray-400">
         {/* we have image */}
         <img src={`http://localhost:5000/${productImage}`} alt="photos" />
         {/* div containing price and the name of product */}
         <Info>
           <span className="text-sm font-bold uppercase">{name}</span>
           {instore === "true" ? (
-            <span className="text-[0.6em] text-pink-400 font-bold p-2">
+            <span className="text-[0.6em] text-indigo-500 font-bold p-2">
               instore
             </span>
           ) : (

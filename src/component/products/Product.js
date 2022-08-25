@@ -15,7 +15,7 @@ export default function Product() {
   `;
   const Light = styled.div`
     flex: 2;
-    background-color: rgba(128, 128, 128, 0.644);
+    /* background-color: rgba(128, 128, 128, 0.644); */
     /* height: 90vh; */
   `;
   const Right = styled.div`
@@ -49,42 +49,42 @@ export default function Product() {
   return (
     <>
       <Main className="">
-        <Light className="flex flex-col p-4 gap-3">
+        <Light className="flex flex-col p-4">
           {/* <Side /> */}
           <h2 className="mx-auto font-bold uppercase">categorly</h2>
           <div className="p-1 bg-gray-100 rounded"></div>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm "
             onClick={() => handleCategorly("simlawseed")}
           >
             simlawseed
           </button>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm"
             onClick={() => handleCategorly("pestcide")}
           >
             pestcide
           </button>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm"
             onClick={() => handleCategorly("fertilizer")}
           >
             fertilizer
           </button>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm"
             onClick={() => handleCategorly("herbcide")}
           >
             herbalcide
           </button>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm"
             onClick={() => handleCategorly("insectcide")}
           >
             insectside
           </button>
           <button
-            className="shadow-sm border-x-2 border-green-200 p-3 bg-gray-300 uppercase"
+            className="shadow-sm border-x-2 border-gray-200 p-3 bg-gray-100 uppercase font-light border-b-2 text-sm"
             onClick={() => handleCategorly("animalbird")}
           >
             animal & bird feeds
@@ -98,7 +98,7 @@ export default function Product() {
           </div>
         </Right>
       </Main>
-      <div className="footer">
+      <div className="footer mr-5">
         <Footer />
       </div>
     </>

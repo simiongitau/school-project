@@ -20,7 +20,7 @@ function App() {
   return (
     <Provider store={store}>
       <ToastContainer />
-      <div className="nav sticky z-50 top-0 shadow-xl shadow-indigo-300">
+      <div className="nav sticky z-50 top-0 shadow-md shadow-gray-300">
         <Nav />
       </div>
       <Routes>

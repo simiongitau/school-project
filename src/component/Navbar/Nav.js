@@ -16,19 +16,12 @@ export default function Nav() {
   const Main = styled.div`
     height: 100px;
     width: 100%;
-    background-color: rgba(248, 198, 241, 0.651);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 5px;
     padding-right: 10px;
-    span {
-      font-weight: 100;
-      font-size: 20px;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-left: 20px;
-    }
+
     div {
       font-weight: 100;
       font-size: 20px;
@@ -74,9 +67,9 @@ export default function Nav() {
   }, [dispatch]);
   // my testing
   return (
-    <Main className="relative">
+    <Main className="relative bg-gray-100">
       {/* image div */}
-      <span>eldo agrovet</span>
+      <span className="font-bold text-4xl font-mono">Eldo agrovet</span>
       <span className="bg-red-600 rounded-full absolute top-0 text-white p-1 left-[51%] font-bold">
         {cartsQuantity}
       </span>
