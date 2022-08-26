@@ -48,7 +48,7 @@ export default function Product() {
   };
   return (
     <>
-      <Main className="">
+      <Main className="min-h-screen">
         <Light className="flex flex-col p-4">
           {/* <Side /> */}
           <h2 className="mx-auto font-bold uppercase">categorly</h2>
