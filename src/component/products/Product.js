@@ -9,24 +9,23 @@ import "./product.css";
 import Footer from "../footer/Footer";
 export default function Product() {
   const [Data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
   console.log(Data);
   const Main = styled.div`
     display: flex;
   `;
   const Light = styled.div`
     flex: 2;
-    /* background-color: rgba(128, 128, 128, 0.644); */
-    /* height: 90vh; */
   `;
   const Right = styled.div`
     flex: 10;
-    /* height: 90vh; */
   `;
   const fetchData = async () => {
     await axios
       .get(`http://localhost:5000/products`)
       .then((response) => {
         setData(response.data.product);
+        setOriginalData(response.data.product);
       })
       .catch((error) => {
         console.log(error);
@@ -40,10 +39,9 @@ export default function Product() {
   useEffect(() => {
     dispatch(getTotals());
   }, [carts, dispatch]);
-  // console.log(Data);
   console.log(Data.product);
   const handleCategorly = (id) => {
-    const final = Data.filter((item) => item.category === id);
+    const final = originalData.filter((item) => item.category === id);
     setData(final);
   };
   return (

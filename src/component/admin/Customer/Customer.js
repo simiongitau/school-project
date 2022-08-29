@@ -2,7 +2,8 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import handleUpdate from "./Adminupdate";
+// import handleUpdate from "./Adminupdate";
+import Adminupdate from "./Adminupdate";
 export default function Customer() {
   const Wrapper = styled.div`
     display: flex;
@@ -45,8 +46,10 @@ export default function Customer() {
   // handle delete
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:5000/user/delete/${id}`);
+    getUser();
   };
-  const [click, setClick] = useState(false);
+  const [ID, setId] = useState("");
+  const [click, setOnclick] = useState(false);
   // methode to handle delete
   const HandledeleteAdmin = async (id) => {
     await axios.delete(`http://localhost:5000/user/delete/${id}`);
@@ -107,10 +110,13 @@ export default function Customer() {
               <tr className="h-20 border-gray-300 border-b-2 bg-gray-100">
                 <td className="text-center font-extralight">{t.email}</td>
                 <td className="text-center font-extralight">{t.password}</td>
-                <td className="text-center font-extralight">
+                <td
+                  className="text-center font-extralight"
+                  onClick={() => setOnclick(true)}
+                >
                   <button
                     className="bg-green-100  w-[100px] p-2 rounded"
-                    onClick={(e) => setClick(true)}
+                    onClick={() => setId(t._id)}
                   >
                     <i className="bi bi-pen-fill"></i>
                   </button>
@@ -127,7 +133,7 @@ export default function Customer() {
             </tbody>
           ))}
         </table>
-        {click === true ? <div>{handleUpdate()}</div> : ""}
+        {click === true ? <Adminupdate id={ID} setOnclick={setOnclick} /> : ""}
       </Admin>
     </div>
   );

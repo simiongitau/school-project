@@ -77,7 +77,7 @@ export default function Cart() {
     console.log("transaction Cancel");
   };
   return (
-    <div className=" bg-[#d4d1ba] pl-4 h-screen ">
+    <div className=" bg-[#d4d1ba] pl-4 h-full ">
       <i
         className="bi bi-x-circle text-4xl text-red-700"
         onClick={() => handleClearCart()}
