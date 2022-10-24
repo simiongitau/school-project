@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { fetchDeliver } from "../../../Redux/Apicall";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 export default function Orders() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -46,10 +47,18 @@ export default function Orders() {
     await axios.patch(`http://localhost:5000/deliver/update/${id}`, {
       status: "true",
     });
+    fetchDeliver(dispatch);
+    toast.success(`delivery updated`, {
+      position: "top-center",
+    });
   };
   // handle delete
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:5000/deliver/delete/${id}`);
+    toast.success(`delivery removed`, {
+      position: "top-center",
+    });
+    fetchDeliver(dispatch);
   };
   return (
     <div className="relative">

@@ -46,7 +46,7 @@ export default function Product() {
   };
   return (
     <>
-      <Main className="min-h-screen">
+      <Main className="min-h-screen bg-[#d8e4eb]">
         <Light className="flex flex-col p-4">
           {/* <Side /> */}
           <h2 className="mx-auto font-bold uppercase">categorly</h2>
@@ -96,7 +96,7 @@ export default function Product() {
           </div>
         </Right>
       </Main>
-      <div className="footer mr-5">
+      <div className="footer ">
         <Footer />
       </div>
     </>

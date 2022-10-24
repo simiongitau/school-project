@@ -38,8 +38,8 @@ export default function Detail() {
   return (
     <>
       {/* {Detail?.map((e) => console.log(e))} */}
-      <Container>
-        <Light className="flex flex-col">
+      <Container className="">
+        <Light className="flex flex-col ">
           <img
             src={`http://localhost:5000/${Detail.productImage}`}
             alt="photos"

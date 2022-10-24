@@ -7,6 +7,7 @@ import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import { fetchOrder } from "../../../Redux/Apicall";
 import { Chart as ChartJS } from "chart.js/auto";
+import { toast } from "react-toastify";
 export default function Analysis() {
   const Container = styled.div``;
   const Top = styled.div`
@@ -98,8 +99,10 @@ export default function Analysis() {
     labels: chartMonths,
     datasets: [
       {
+        label: "sale analysis",
         data: chartDart,
-        backgroundColor: ["#a78bfa", "#fde047", "white"],
+        backgroundColor: ["#a78bfa", "#fde047", "green"],
+        width: "20px",
       },
     ],
   };
@@ -112,6 +115,10 @@ export default function Analysis() {
   // handle delete
   const Handledelete = async (id) => {
     await axios.delete(`http://localhost:5000/order/delete/${id}`);
+    fetchOrder(dispatch);
+    toast.success(`order removed`, {
+      position: "top-center",
+    });
   };
   return (
     <Container className="flex flex-col">

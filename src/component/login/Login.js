@@ -37,11 +37,11 @@ export default function Login() {
       });
   };
   return (
-    <div className="grid grid-cols-2 pt-[100px]">
+    <div className="grid grid-cols-2 pt-[100px] bg-[#d8e4eb] h-screen">
       {/* login div */}
       <div className="p-10 flex justify-center">
         <form
-          className=" w-[80%]  rounded shadow-md p-3 bg-[#d4d1ba]"
+          className=" w-[80%]  rounded shadow-md p-3 bg-[#d4d1ba] h-[58%]"
           onSubmit={SubmitData}
         >
           <span className="font-bold uppercase mx-[50%] ">login</span>

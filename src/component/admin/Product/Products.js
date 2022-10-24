@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function Products() {
   const [data, setData] = useState([]);
   // fetching products
@@ -21,6 +22,10 @@ export default function Products() {
   // handle delete function
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:5000/product/delete/${id}`);
+    toast.success(`product removed`, {
+      position: "top-center",
+    });
+    fetchProduct();
   };
   return (
     <div className="relative">

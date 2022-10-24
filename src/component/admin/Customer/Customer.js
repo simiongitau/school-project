@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 // import handleUpdate from "./Adminupdate";
 import Adminupdate from "./Adminupdate";
 export default function Customer() {
@@ -47,12 +48,19 @@ export default function Customer() {
   const handleDelete = async (id) => {
     await axios.delete(`http://localhost:5000/user/delete/${id}`);
     getUser();
+    toast.success(`User removed`, {
+      position: "top-center",
+    });
   };
   const [ID, setId] = useState("");
   const [click, setOnclick] = useState(false);
   // methode to handle delete
   const HandledeleteAdmin = async (id) => {
     await axios.delete(`http://localhost:5000/user/delete/${id}`);
+    getAdmin();
+    toast.success(`Admin removed`, {
+      position: "top-center",
+    });
   };
   return (
     <div className="flex">
